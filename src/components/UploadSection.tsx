@@ -221,15 +221,15 @@ export function UploadSection() {
     setError(null);
     setLoading(true);
     try {
-      const everestUrl = import.meta.env.VITE_EVEREST_LINK;
-      const bookingUrl = import.meta.env.VITE_BOOKING_LINK;
-      const commercialUrl = import.meta.env.VITE_COMMERCIAL_LINK;
-      const vendorUrl = import.meta.env.VITE_VENDOR_MAPPING_LINK;
-      const idfcUrl = import.meta.env.VITE_IDFC_LINK;
-      const manualUrl = import.meta.env.VITE_MANUAL_TRANSACTIONS_LINK;
+      const everestUrl = (import.meta.env.VITE_EVEREST_LINK || '').replace(/^["']|["']$/g, '').trim();
+      const bookingUrl = (import.meta.env.VITE_BOOKING_LINK || '').replace(/^["']|["']$/g, '').trim();
+      const commercialUrl = (import.meta.env.VITE_COMMERCIAL_LINK || '').replace(/^["']|["']$/g, '').trim();
+      const vendorUrl = (import.meta.env.VITE_VENDOR_MAPPING_LINK || '').replace(/^["']|["']$/g, '').trim();
+      const idfcUrl = (import.meta.env.VITE_IDFC_LINK || '').replace(/^["']|["']$/g, '').trim();
+      const manualUrl = (import.meta.env.VITE_MANUAL_TRANSACTIONS_LINK || '').replace(/^["']|["']$/g, '').trim();
 
       if (!everestUrl || !bookingUrl || !commercialUrl || !vendorUrl || !idfcUrl || !manualUrl) {
-        throw new Error("One or more Google Sheets links are not defined in .env");
+        throw new Error("One or more Google Sheets links are not defined in environment variables");
       }
 
       // Generate OAuth Token from service account

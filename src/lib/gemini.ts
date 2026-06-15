@@ -1,6 +1,9 @@
 import { GoogleGenAI } from '@google/genai';
 
-const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
+const rawApiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
+const cleanApiKey = rawApiKey.replace(/^["']|["']$/g, '').trim();
+
+const ai = new GoogleGenAI({ apiKey: cleanApiKey });
 
 export async function parseQueryWithGeminiAll(query: string, schemas: Record<string, any>) {
   const prompt = `
