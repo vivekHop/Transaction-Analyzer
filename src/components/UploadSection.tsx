@@ -31,13 +31,12 @@ export function UploadSection() {
     if (!privateKeyStr || !clientEmail) {
       throw new Error("Google API credentials are not configured in environment variables (.env)");
     }
-    const cleanKey = privateKeyStr.replace(/^["']|["']$/g, '').replace(/\\n/g, '\n').trim();
+    const cleanKey = privateKeyStr
+      .replace(/^["']|["']$/g, '')
+      .replace(/\\+n/g, '\n')
+      .replace(/\\+r/g, '\r')
+      .trim();
     const cleanEmail = clientEmail.replace(/^["']|["']$/g, '').trim();
-    
-    console.log("VITE_GOOGLE_PRIVATE_KEY raw length:", privateKeyStr?.length);
-    console.log("cleanKey length:", cleanKey?.length);
-    console.log("cleanKey starts with:", cleanKey?.substring(0, 40));
-    console.log("cleanKey ends with:", cleanKey?.substring(cleanKey.length - 40));
     
     const privateKey = await importPKCS8(cleanKey, 'RS256');
     
