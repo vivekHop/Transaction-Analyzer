@@ -11,6 +11,7 @@ if (typeof Uint8Array.fromBase64 === 'function') {
       return originalFromBase64.call(Uint8Array, str, options);
     } catch (err: any) {
       console.error("Uint8Array.fromBase64 failed decoding string:", {
+
         strLength: str?.length,
         strStart: str?.substring(0, 100),
         strEnd: str?.substring(str?.length - 100),

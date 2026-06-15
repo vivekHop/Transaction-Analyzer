@@ -7,18 +7,18 @@ import { SignJWT, importPKCS8 } from 'jose';
 
 
 export function UploadSection() {
-  const { 
-    setTransactionsRaw, 
-    setBookingsRaw, 
-    setCommercialsRaw, 
-    setVendorsRaw, 
-    setIdfcRaw, 
+  const {
+    setTransactionsRaw,
+    setBookingsRaw,
+    setCommercialsRaw,
+    setVendorsRaw,
+    setIdfcRaw,
     setManualTransactionsRaw,
-    processData, 
-    transactionsRaw, 
-    bookingsRaw, 
-    commercialsRaw, 
-    vendorsRaw, 
+    processData,
+    transactionsRaw,
+    bookingsRaw,
+    commercialsRaw,
+    vendorsRaw,
     idfcRaw,
     manualTransactionsRaw
   } = useStore();
@@ -31,7 +31,7 @@ export function UploadSection() {
     if (!privateKeyStr || !clientEmail) {
       throw new Error("Google API credentials are not configured in environment variables (.env)");
     }
-    
+
     // Clean and normalize the environment variable
     let cleaned = privateKeyStr
       .replace(/^["']|["']$/g, '')
@@ -42,7 +42,7 @@ export function UploadSection() {
     // Extract the raw base64 body from between PEM headers/footers
     const header = "-----BEGIN PRIVATE KEY-----";
     const footer = "-----END PRIVATE KEY-----";
-    
+
     let body = cleaned;
     if (body.includes(header)) {
       body = body.substring(body.indexOf(header) + header.length);
@@ -50,16 +50,16 @@ export function UploadSection() {
     if (body.includes(footer)) {
       body = body.substring(0, body.indexOf(footer));
     }
-    
+
     // Strip all non-base64 characters (whitespace, quotes, slashes, backslashes, etc.)
     const base64Body = body.replace(/[^A-Za-z0-9+/=]/g, '');
-    
+
     // Reconstruct clean single-line PEM
     const cleanKey = `${header}\n${base64Body}\n${footer}`;
     const cleanEmail = clientEmail.replace(/^["']|["']$/g, '').trim();
-    
+
     const privateKey = await importPKCS8(cleanKey, 'RS256');
-    
+
     const jwt = await new SignJWT({
       iss: cleanEmail,
       scope: 'https://www.googleapis.com/auth/spreadsheets.readonly',
@@ -93,7 +93,7 @@ export function UploadSection() {
   const fetchGoogleSheetData = async (url: string, accessToken: string) => {
     const sheetIdMatch = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
     const gidMatch = url.match(/gid=([0-9]+)/);
-    
+
     if (!sheetIdMatch) throw new Error("Invalid Google Sheets URL: missing spreadsheet ID");
     const sheetId = sheetIdMatch[1];
     const gid = gidMatch ? parseInt(gidMatch[1], 10) : 0;
@@ -110,7 +110,7 @@ export function UploadSection() {
       try { err = JSON.parse(errText); } catch { err = { error: { message: errText } }; }
       throw new Error(err.error?.message || "Failed to fetch spreadsheet metadata");
     }
-    
+
     const metaText = await metaRes.text();
     let meta;
     try {
@@ -129,14 +129,14 @@ export function UploadSection() {
         Authorization: `Bearer ${accessToken}`
       }
     });
-    
+
     if (!detailedRes.ok) {
       const errText = await detailedRes.text();
       let err;
       try { err = JSON.parse(errText); } catch { err = { error: { message: errText } }; }
       throw new Error(err.error?.message || "Failed to fetch spreadsheet detailed data");
     }
-    
+
     const detailedText = await detailedRes.text();
     let detailedData;
     try {
@@ -166,7 +166,7 @@ export function UploadSection() {
         if (cell.dataValidation?.condition?.values) {
           options = cell.dataValidation.condition.values.map((v: any) => v.userEnteredValue).filter(Boolean);
         }
-        
+
         if (cell.effectiveValue) {
           const numFormat = cell.effectiveFormat?.numberFormat?.type;
           if (numFormat === 'DATE' || numFormat === 'DATE_TIME' || numFormat === 'TIME') {
@@ -182,7 +182,7 @@ export function UploadSection() {
           }
         }
       }
-      
+
       metadata.columns.push({ name: header, type, options });
     });
 
@@ -196,7 +196,7 @@ export function UploadSection() {
         if (cell) {
           const formatType = cell.effectiveFormat?.numberFormat?.type;
           const isDate = formatType === 'DATE' || formatType === 'DATE_TIME' || formatType === 'TIME';
-          
+
           if (isDate && cell.formattedValue) {
             val = cell.formattedValue;
           } else if (cell.effectiveValue?.numberValue !== undefined) {
@@ -235,6 +235,7 @@ export function UploadSection() {
       // Generate OAuth Token from service account
       const accessToken = await getGoogleAccessToken();
 
+
       const { setDatasetsMetadata } = useStore.getState();
 
       // Fetch all simultaneously
@@ -264,7 +265,7 @@ export function UploadSection() {
 
       setManualTransactionsRaw(manualRes.data);
       setDatasetsMetadata('manual-transactions', manualRes.metadata);
-      
+
     } catch (e: any) {
       console.error(e);
       setError(e.message || "Failed to fetch data from Google Sheets");
@@ -294,11 +295,10 @@ export function UploadSection() {
         <button
           onClick={handleFetchData}
           disabled={loading}
-          className={`w-full max-w-md py-4 rounded-xl flex items-center justify-center gap-3 text-lg font-medium transition-all ${
-            loading 
+          className={`w-full max-w-md py-4 rounded-xl flex items-center justify-center gap-3 text-lg font-medium transition-all ${loading
               ? 'bg-surface-elevated text-muted-text cursor-not-allowed'
               : 'bg-primary-accent hover:bg-primary-accent/90 text-white shadow-lg shadow-primary-accent/25'
-          }`}
+            }`}
         >
           {loading ? (
             <>
@@ -321,7 +321,7 @@ export function UploadSection() {
       </div>
 
       {(hasTx || hasBk) && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="w-full bg-surface border border-border rounded-xl p-6"
@@ -338,7 +338,7 @@ export function UploadSection() {
               </div>
               {hasTx ? <CheckCircle2 className="text-success" size={20} /> : <AlertTriangle className="text-warning" size={20} />}
             </div>
-            
+
             <div className="flex items-center justify-between p-4 bg-background rounded-lg border border-border/50">
               <div className="flex items-center gap-3">
                 <Database className={hasBk ? "text-secondary-accent" : "text-muted-text"} />
@@ -398,11 +398,10 @@ export function UploadSection() {
           <button
             onClick={processData}
             disabled={!canProcess}
-            className={`w-full py-3 rounded-lg font-medium transition-all ${
-              canProcess 
-                ? 'bg-primary-accent hover:bg-primary-accent/90 text-white shadow-lg shadow-primary-accent/25' 
+            className={`w-full py-3 rounded-lg font-medium transition-all ${canProcess
+                ? 'bg-primary-accent hover:bg-primary-accent/90 text-white shadow-lg shadow-primary-accent/25'
                 : 'bg-surface-elevated text-muted-text cursor-not-allowed'
-            }`}
+              }`}
           >
             Process & Match Data
           </button>

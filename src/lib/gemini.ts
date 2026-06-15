@@ -11,6 +11,7 @@ You are a data analysis AI. Convert the user's question into structured JSON que
 The user question may apply to different datasets (matched-ad2, matched-ad1-idfc, unmatched, all, everest, bookings, idfc, commercials, vendors, manual-transactions) which represent different sheets/tabs in our application.
 Please output a query plan for EACH dataset. If the query does not apply to a dataset or cannot be answered using its columns, output null for that dataset.
 
+
 Available schemas for each dataset:
 ${JSON.stringify(schemas, null, 2)}
 
@@ -54,9 +55,9 @@ DO NOT include markdown formatting or backticks in the response. Return raw JSON
         responseMimeType: "application/json"
       }
     });
-    
+
     if (!response.text) throw new Error("Empty response from Gemini");
-    
+
     const jsonStr = response.text.replace(/```json\n?|\n?```/g, '').trim();
     return JSON.parse(jsonStr);
   } catch (err: any) {
