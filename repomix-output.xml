@@ -1,0 +1,3448 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.env.example
+.gitignore
+eslint.config.js
+index.html
+package.json
+public/favicon.svg
+public/icons.svg
+README.md
+src/App.css
+src/App.tsx
+src/assets/hero.png
+src/assets/react.svg
+src/assets/vite.svg
+src/components/ErrorCenter.tsx
+src/components/KPIDashboard.tsx
+src/components/Navigation.tsx
+src/components/QuerySidebar.tsx
+src/components/ResultsArea.tsx
+src/components/UploadSection.tsx
+src/components/Workspace.tsx
+src/dataProcessor.worker.ts
+src/index.css
+src/lib/db.ts
+src/lib/gemini.ts
+src/lib/queryEngine.ts
+src/main.tsx
+src/store.ts
+tsconfig.app.json
+tsconfig.json
+tsconfig.node.json
+vite.config.ts
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".env.example">
+VITE_GEMINI_API_KEY=your_gemini_api_key_here
+VITE_GOOGLE_SHEETS_API_KEY=your_google_sheets_api_key_here
+VITE_EVEREST_LINK="your_everest_link_here"
+VITE_BOOKING_LINK="your_booking_link_here"
+VITE_COMMERCIAL_LINK="your_commercial_link_here"
+VITE_VENDOR_MAPPING_LINK="your_vendor_mapping_link_here"
+</file>
+
+<file path=".gitignore">
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+my-sheets-498400-ade16eec1d63.json
+</file>
+
+<file path="eslint.config.js">
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import tseslint from 'typescript-eslint'
+import { defineConfig, globalIgnores } from 'eslint/config'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      globals: globals.browser,
+    },
+  },
+])
+</file>
+
+<file path="index.html">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>temp</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+</file>
+
+<file path="package.json">
+{
+  "name": "temp",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@google/genai": "^2.7.0",
+    "@tailwindcss/vite": "^4.3.0",
+    "@tanstack/react-virtual": "^3.14.2",
+    "autoprefixer": "^10.5.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.40.0",
+    "jose": "^6.2.3",
+    "lucide-react": "^1.17.0",
+    "postcss": "^8.5.15",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-dropzone": "^15.0.0",
+    "recharts": "^3.8.1",
+    "tailwind-merge": "^3.6.0",
+    "tailwindcss": "^4.3.0",
+    "xlsx": "^0.18.5",
+    "zod": "^4.4.3",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.12.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^10.3.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.6.0",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.59.2",
+    "vite": "^8.0.12"
+  }
+}
+</file>
+
+<file path="public/favicon.svg">
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="46" fill="none" viewBox="0 0 48 46"><path fill="#863bff" d="M25.946 44.938c-.664.845-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.287c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.497 0-3.578-1.842-3.578H1.237c-.92 0-1.456-1.04-.92-1.788L10.013.474c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.579 1.842 3.579h11.377c.943 0 1.473 1.088.89 1.83L25.947 44.94z" style="fill:#863bff;fill:color(display-p3 .5252 .23 1);fill-opacity:1"/><mask id="a" width="48" height="46" x="0" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha"><path fill="#000" d="M25.842 44.938c-.664.844-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.183c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.498 0-3.579-1.842-3.579H1.133c-.92 0-1.456-1.04-.92-1.787L9.91.473c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.578 1.842 3.578h11.377c.943 0 1.473 1.088.89 1.832L25.843 44.94z" style="fill:#000;fill-opacity:1"/></mask><g mask="url(#a)"><g filter="url(#b)"><ellipse cx="5.508" cy="14.704" fill="#ede6ff" rx="5.508" ry="14.704" style="fill:#ede6ff;fill:color(display-p3 .9275 .9033 1);fill-opacity:1" transform="matrix(.00324 1 1 -.00324 -4.47 31.516)"/></g><g filter="url(#c)"><ellipse cx="10.399" cy="29.851" fill="#ede6ff" rx="10.399" ry="29.851" style="fill:#ede6ff;fill:color(display-p3 .9275 .9033 1);fill-opacity:1" transform="matrix(.00324 1 1 -.00324 -39.328 7.883)"/></g><g filter="url(#d)"><ellipse cx="5.508" cy="30.487" fill="#7e14ff" rx="5.508" ry="30.487" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(89.814 -25.913 -14.639)scale(1 -1)"/></g><g filter="url(#e)"><ellipse cx="5.508" cy="30.599" fill="#7e14ff" rx="5.508" ry="30.599" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(89.814 -32.644 -3.334)scale(1 -1)"/></g><g filter="url(#f)"><ellipse cx="5.508" cy="30.599" fill="#7e14ff" rx="5.508" ry="30.599" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="matrix(.00324 1 1 -.00324 -34.34 30.47)"/></g><g filter="url(#g)"><ellipse cx="14.072" cy="22.078" fill="#ede6ff" rx="14.072" ry="22.078" style="fill:#ede6ff;fill:color(display-p3 .9275 .9033 1);fill-opacity:1" transform="rotate(93.35 24.506 48.493)scale(-1 1)"/></g><g filter="url(#h)"><ellipse cx="3.47" cy="21.501" fill="#7e14ff" rx="3.47" ry="21.501" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(89.009 28.708 47.59)scale(-1 1)"/></g><g filter="url(#i)"><ellipse cx="3.47" cy="21.501" fill="#7e14ff" rx="3.47" ry="21.501" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(89.009 28.708 47.59)scale(-1 1)"/></g><g filter="url(#j)"><ellipse cx=".387" cy="8.972" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(39.51 .387 8.972)"/></g><g filter="url(#k)"><ellipse cx="47.523" cy="-6.092" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(37.892 47.523 -6.092)"/></g><g filter="url(#l)"><ellipse cx="41.412" cy="6.333" fill="#47bfff" rx="5.971" ry="9.665" style="fill:#47bfff;fill:color(display-p3 .2799 .748 1);fill-opacity:1" transform="rotate(37.892 41.412 6.333)"/></g><g filter="url(#m)"><ellipse cx="-1.879" cy="38.332" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(37.892 -1.88 38.332)"/></g><g filter="url(#n)"><ellipse cx="-1.879" cy="38.332" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(37.892 -1.88 38.332)"/></g><g filter="url(#o)"><ellipse cx="35.651" cy="29.907" fill="#7e14ff" rx="4.407" ry="29.108" style="fill:#7e14ff;fill:color(display-p3 .4922 .0767 1);fill-opacity:1" transform="rotate(37.892 35.651 29.907)"/></g><g filter="url(#p)"><ellipse cx="38.418" cy="32.4" fill="#47bfff" rx="5.971" ry="15.297" style="fill:#47bfff;fill:color(display-p3 .2799 .748 1);fill-opacity:1" transform="rotate(37.892 38.418 32.4)"/></g></g><defs><filter id="b" width="60.045" height="41.654" x="-19.77" y="16.149" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="7.659"/></filter><filter id="c" width="90.34" height="51.437" x="-54.613" y="-7.533" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="7.659"/></filter><filter id="d" width="79.355" height="29.4" x="-49.64" y="2.03" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="e" width="79.579" height="29.4" x="-45.045" y="20.029" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="f" width="79.579" height="29.4" x="-43.513" y="21.178" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="g" width="74.749" height="58.852" x="15.756" y="-17.901" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="7.659"/></filter><filter id="h" width="61.377" height="25.362" x="23.548" y="2.284" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="i" width="61.377" height="25.362" x="23.548" y="2.284" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="j" width="56.045" height="63.649" x="-27.636" y="-22.853" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="k" width="54.814" height="64.646" x="20.116" y="-38.415" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="l" width="33.541" height="35.313" x="24.641" y="-11.323" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="m" width="54.814" height="64.646" x="-29.286" y="6.009" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="n" width="54.814" height="64.646" x="-29.286" y="6.009" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="o" width="54.814" height="64.646" x="8.244" y="-2.416" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter><filter id="p" width="39.409" height="43.623" x="18.713" y="10.588" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17158" stdDeviation="4.596"/></filter></defs></svg>
+</file>
+
+<file path="public/icons.svg">
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="bluesky-icon" viewBox="0 0 16 17">
+    <g clip-path="url(#bluesky-clip)"><path fill="#08060d" d="M7.75 7.735c-.693-1.348-2.58-3.86-4.334-5.097-1.68-1.187-2.32-.981-2.74-.79C.188 2.065.1 2.812.1 3.251s.241 3.602.398 4.13c.52 1.744 2.367 2.333 4.07 2.145-2.495.37-4.71 1.278-1.805 4.512 3.196 3.309 4.38-.71 4.987-2.746.608 2.036 1.307 5.91 4.93 2.746 2.72-2.746.747-4.143-1.747-4.512 1.702.189 3.55-.4 4.07-2.145.156-.528.397-3.691.397-4.13s-.088-1.186-.575-1.406c-.42-.19-1.06-.395-2.741.79-1.755 1.24-3.64 3.752-4.334 5.099"/></g>
+    <defs><clipPath id="bluesky-clip"><path fill="#fff" d="M.1.85h15.3v15.3H.1z"/></clipPath></defs>
+  </symbol>
+  <symbol id="discord-icon" viewBox="0 0 20 19">
+    <path fill="#08060d" d="M16.224 3.768a14.5 14.5 0 0 0-3.67-1.153c-.158.286-.343.67-.47.976a13.5 13.5 0 0 0-4.067 0c-.128-.306-.317-.69-.476-.976A14.4 14.4 0 0 0 3.868 3.77C1.546 7.28.916 10.703 1.231 14.077a14.7 14.7 0 0 0 4.5 2.306q.545-.748.965-1.587a9.5 9.5 0 0 1-1.518-.74q.191-.14.372-.293c2.927 1.369 6.107 1.369 8.999 0q.183.152.372.294-.723.437-1.52.74.418.838.963 1.588a14.6 14.6 0 0 0 4.504-2.308c.37-3.911-.63-7.302-2.644-10.309m-9.13 8.234c-.878 0-1.599-.82-1.599-1.82 0-.998.705-1.82 1.6-1.82.894 0 1.614.82 1.599 1.82.001 1-.705 1.82-1.6 1.82m5.91 0c-.878 0-1.599-.82-1.599-1.82 0-.998.705-1.82 1.6-1.82.893 0 1.614.82 1.599 1.82 0 1-.706 1.82-1.6 1.82"/>
+  </symbol>
+  <symbol id="documentation-icon" viewBox="0 0 21 20">
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="m15.5 13.333 1.533 1.322c.645.555.967.833.967 1.178s-.322.623-.967 1.179L15.5 18.333m-3.333-5-1.534 1.322c-.644.555-.966.833-.966 1.178s.322.623.966 1.179l1.534 1.321"/>
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M17.167 10.836v-4.32c0-1.41 0-2.117-.224-2.68-.359-.906-1.118-1.621-2.08-1.96-.599-.21-1.349-.21-2.848-.21-2.623 0-3.935 0-4.983.369-1.684.591-3.013 1.842-3.641 3.428C3 6.449 3 7.684 3 10.154v2.122c0 2.558 0 3.838.706 4.726q.306.383.713.671c.76.536 1.79.64 3.581.66"/>
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M3 10a2.78 2.78 0 0 1 2.778-2.778c.555 0 1.209.097 1.748-.047.48-.129.854-.503.982-.982.145-.54.048-1.194.048-1.749a2.78 2.78 0 0 1 2.777-2.777"/>
+  </symbol>
+  <symbol id="github-icon" viewBox="0 0 19 19">
+    <path fill="#08060d" fill-rule="evenodd" d="M9.356 1.85C5.05 1.85 1.57 5.356 1.57 9.694a7.84 7.84 0 0 0 5.324 7.44c.387.079.528-.168.528-.376 0-.182-.013-.805-.013-1.454-2.165.467-2.616-.935-2.616-.935-.349-.91-.864-1.143-.864-1.143-.71-.48.051-.48.051-.48.787.051 1.2.805 1.2.805.695 1.194 1.817.857 2.268.649.064-.507.27-.857.49-1.052-1.728-.182-3.545-.857-3.545-3.87 0-.857.31-1.558.8-2.104-.078-.195-.349-1 .077-2.078 0 0 .657-.208 2.14.805a7.5 7.5 0 0 1 1.946-.26c.657 0 1.328.092 1.946.26 1.483-1.013 2.14-.805 2.14-.805.426 1.078.155 1.883.078 2.078.502.546.799 1.247.799 2.104 0 3.013-1.818 3.675-3.558 3.87.284.247.528.714.528 1.454 0 1.052-.012 1.896-.012 2.156 0 .208.142.455.528.377a7.84 7.84 0 0 0 5.324-7.441c.013-4.338-3.48-7.844-7.773-7.844" clip-rule="evenodd"/>
+  </symbol>
+  <symbol id="social-icon" viewBox="0 0 20 20">
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M12.5 6.667a4.167 4.167 0 1 0-8.334 0 4.167 4.167 0 0 0 8.334 0"/>
+    <path fill="none" stroke="#aa3bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.35" d="M2.5 16.667a5.833 5.833 0 0 1 8.75-5.053m3.837.474.513 1.035c.07.144.257.282.414.309l.93.155c.596.1.736.536.307.965l-.723.73a.64.64 0 0 0-.152.531l.207.903c.164.715-.213.991-.84.618l-.872-.52a.63.63 0 0 0-.577 0l-.872.52c-.624.373-1.003.094-.84-.618l.207-.903a.64.64 0 0 0-.152-.532l-.723-.729c-.426-.43-.289-.864.306-.964l.93-.156a.64.64 0 0 0 .412-.31l.513-1.034c.28-.562.735-.562 1.012 0"/>
+  </symbol>
+  <symbol id="x-icon" viewBox="0 0 19 19">
+    <path fill="#08060d" fill-rule="evenodd" d="M1.893 1.98c.052.072 1.245 1.769 2.653 3.77l2.892 4.114c.183.261.333.48.333.486s-.068.089-.152.183l-.522.593-.765.867-3.597 4.087c-.375.426-.734.834-.798.905a1 1 0 0 0-.118.148c0 .01.236.017.664.017h.663l.729-.83c.4-.457.796-.906.879-.999a692 692 0 0 0 1.794-2.038c.034-.037.301-.34.594-.675l.551-.624.345-.392a7 7 0 0 1 .34-.374c.006 0 .93 1.306 2.052 2.903l2.084 2.965.045.063h2.275c1.87 0 2.273-.003 2.266-.021-.008-.02-1.098-1.572-3.894-5.547-2.013-2.862-2.28-3.246-2.273-3.266.008-.019.282-.332 2.085-2.38l2-2.274 1.567-1.782c.022-.028-.016-.03-.65-.03h-.674l-.3.342a871 871 0 0 1-1.782 2.025c-.067.075-.405.458-.75.852a100 100 0 0 1-.803.91c-.148.172-.299.344-.99 1.127-.304.343-.32.358-.345.327-.015-.019-.904-1.282-1.976-2.808L6.365 1.85H1.8zm1.782.91 8.078 11.294c.772 1.08 1.413 1.973 1.425 1.984.016.017.241.02 1.05.017l1.03-.004-2.694-3.766L7.796 5.75 5.722 2.852l-1.039-.004-1.039-.004z" clip-rule="evenodd"/>
+  </symbol>
+</svg>
+</file>
+
+<file path="README.md">
+# React + TypeScript + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+</file>
+
+<file path="src/App.css">
+.counter {
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 2px solid transparent;
+  transition: border-color 0.3s;
+  margin-bottom: 24px;
+
+  &:hover {
+    border-color: var(--accent-border);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+.hero {
+  position: relative;
+
+  .base,
+  .framework,
+  .vite {
+    inset-inline: 0;
+    margin: 0 auto;
+  }
+
+  .base {
+    width: 170px;
+    position: relative;
+    z-index: 0;
+  }
+
+  .framework,
+  .vite {
+    position: absolute;
+  }
+
+  .framework {
+    z-index: 1;
+    top: 34px;
+    height: 28px;
+    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
+      scale(1.4);
+  }
+
+  .vite {
+    z-index: 0;
+    top: 107px;
+    height: 26px;
+    width: auto;
+    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
+      scale(0.8);
+  }
+}
+
+#center {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  place-content: center;
+  place-items: center;
+  flex-grow: 1;
+
+  @media (max-width: 1024px) {
+    padding: 32px 20px 24px;
+    gap: 18px;
+  }
+}
+
+#next-steps {
+  display: flex;
+  border-top: 1px solid var(--border);
+  text-align: left;
+
+  & > div {
+    flex: 1 1 0;
+    padding: 32px;
+    @media (max-width: 1024px) {
+      padding: 24px 20px;
+    }
+  }
+
+  .icon {
+    margin-bottom: 16px;
+    width: 22px;
+    height: 22px;
+  }
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+#docs {
+  border-right: 1px solid var(--border);
+
+  @media (max-width: 1024px) {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+#next-steps ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+  margin: 32px 0 0;
+
+  .logo {
+    height: 18px;
+  }
+
+  a {
+    color: var(--text-h);
+    font-size: 16px;
+    border-radius: 6px;
+    background: var(--social-bg);
+    display: flex;
+    padding: 6px 12px;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: box-shadow 0.3s;
+
+    &:hover {
+      box-shadow: var(--shadow);
+    }
+    .button-icon {
+      height: 18px;
+      width: 18px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    li {
+      flex: 1 1 calc(50% - 8px);
+    }
+
+    a {
+      width: 100%;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+  }
+}
+
+#spacer {
+  height: 88px;
+  border-top: 1px solid var(--border);
+  @media (max-width: 1024px) {
+    height: 48px;
+  }
+}
+
+.ticks {
+  position: relative;
+  width: 100%;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: -4.5px;
+    border: 5px solid transparent;
+  }
+
+  &::before {
+    left: 0;
+    border-left-color: var(--border);
+  }
+  &::after {
+    right: 0;
+    border-right-color: var(--border);
+  }
+}
+</file>
+
+<file path="src/App.tsx">
+import React from 'react';
+import { useStore } from './store';
+import { Navigation } from './components/Navigation';
+import { KPIDashboard } from './components/KPIDashboard';
+import { UploadSection } from './components/UploadSection';
+import { Workspace } from './components/Workspace';
+import { ErrorCenter } from './components/ErrorCenter';
+
+function App() {
+  const processedData = useStore(state => state.processedData);
+  const hasData = processedData.length > 0;
+
+  return (
+    <div className="min-h-screen flex flex-col relative overflow-hidden">
+      <Navigation />
+      
+      <main className="flex-1 flex flex-col p-6 overflow-hidden">
+        <ErrorCenter />
+        
+        {!hasData ? (
+          <UploadSection />
+        ) : (
+          <div className="flex flex-col flex-1 gap-6 overflow-hidden">
+            <KPIDashboard />
+            <Workspace />
+          </div>
+        )}
+      </main>
+    </div>
+  );
+}
+
+export default App;
+</file>
+
+<file path="src/assets/react.svg">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--logos" width="35.93" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 228"><path fill="#00D8FF" d="M210.483 73.824a171.49 171.49 0 0 0-8.24-2.597c.465-1.9.893-3.777 1.273-5.621c6.238-30.281 2.16-54.676-11.769-62.708c-13.355-7.7-35.196.329-57.254 19.526a171.23 171.23 0 0 0-6.375 5.848a155.866 155.866 0 0 0-4.241-3.917C100.759 3.829 77.587-4.822 63.673 3.233C50.33 10.957 46.379 33.89 51.995 62.588a170.974 170.974 0 0 0 1.892 8.48c-3.28.932-6.445 1.924-9.474 2.98C17.309 83.498 0 98.307 0 113.668c0 15.865 18.582 31.778 46.812 41.427a145.52 145.52 0 0 0 6.921 2.165a167.467 167.467 0 0 0-2.01 9.138c-5.354 28.2-1.173 50.591 12.134 58.266c13.744 7.926 36.812-.22 59.273-19.855a145.567 145.567 0 0 0 5.342-4.923a168.064 168.064 0 0 0 6.92 6.314c21.758 18.722 43.246 26.282 56.54 18.586c13.731-7.949 18.194-32.003 12.4-61.268a145.016 145.016 0 0 0-1.535-6.842c1.62-.48 3.21-.974 4.76-1.488c29.348-9.723 48.443-25.443 48.443-41.52c0-15.417-17.868-30.326-45.517-39.844Zm-6.365 70.984c-1.4.463-2.836.91-4.3 1.345c-3.24-10.257-7.612-21.163-12.963-32.432c5.106-11 9.31-21.767 12.459-31.957c2.619.758 5.16 1.557 7.61 2.4c23.69 8.156 38.14 20.213 38.14 29.504c0 9.896-15.606 22.743-40.946 31.14Zm-10.514 20.834c2.562 12.94 2.927 24.64 1.23 33.787c-1.524 8.219-4.59 13.698-8.382 15.893c-8.067 4.67-25.32-1.4-43.927-17.412a156.726 156.726 0 0 1-6.437-5.87c7.214-7.889 14.423-17.06 21.459-27.246c12.376-1.098 24.068-2.894 34.671-5.345a134.17 134.17 0 0 1 1.386 6.193ZM87.276 214.515c-7.882 2.783-14.16 2.863-17.955.675c-8.075-4.657-11.432-22.636-6.853-46.752a156.923 156.923 0 0 1 1.869-8.499c10.486 2.32 22.093 3.988 34.498 4.994c7.084 9.967 14.501 19.128 21.976 27.15a134.668 134.668 0 0 1-4.877 4.492c-9.933 8.682-19.886 14.842-28.658 17.94ZM50.35 144.747c-12.483-4.267-22.792-9.812-29.858-15.863c-6.35-5.437-9.555-10.836-9.555-15.216c0-9.322 13.897-21.212 37.076-29.293c2.813-.98 5.757-1.905 8.812-2.773c3.204 10.42 7.406 21.315 12.477 32.332c-5.137 11.18-9.399 22.249-12.634 32.792a134.718 134.718 0 0 1-6.318-1.979Zm12.378-84.26c-4.811-24.587-1.616-43.134 6.425-47.789c8.564-4.958 27.502 2.111 47.463 19.835a144.318 144.318 0 0 1 3.841 3.545c-7.438 7.987-14.787 17.08-21.808 26.988c-12.04 1.116-23.565 2.908-34.161 5.309a160.342 160.342 0 0 1-1.76-7.887Zm110.427 27.268a347.8 347.8 0 0 0-7.785-12.803c8.168 1.033 15.994 2.404 23.343 4.08c-2.206 7.072-4.956 14.465-8.193 22.045a381.151 381.151 0 0 0-7.365-13.322Zm-45.032-43.861c5.044 5.465 10.096 11.566 15.065 18.186a322.04 322.04 0 0 0-30.257-.006c4.974-6.559 10.069-12.652 15.192-18.18ZM82.802 87.83a323.167 323.167 0 0 0-7.227 13.238c-3.184-7.553-5.909-14.98-8.134-22.152c7.304-1.634 15.093-2.97 23.209-3.984a321.524 321.524 0 0 0-7.848 12.897Zm8.081 65.352c-8.385-.936-16.291-2.203-23.593-3.793c2.26-7.3 5.045-14.885 8.298-22.6a321.187 321.187 0 0 0 7.257 13.246c2.594 4.48 5.28 8.868 8.038 13.147Zm37.542 31.03c-5.184-5.592-10.354-11.779-15.403-18.433c4.902.192 9.899.29 14.978.29c5.218 0 10.376-.117 15.453-.343c-4.985 6.774-10.018 12.97-15.028 18.486Zm52.198-57.817c3.422 7.8 6.306 15.345 8.596 22.52c-7.422 1.694-15.436 3.058-23.88 4.071a382.417 382.417 0 0 0 7.859-13.026a347.403 347.403 0 0 0 7.425-13.565Zm-16.898 8.101a358.557 358.557 0 0 1-12.281 19.815a329.4 329.4 0 0 1-23.444.823c-7.967 0-15.716-.248-23.178-.732a310.202 310.202 0 0 1-12.513-19.846h.001a307.41 307.41 0 0 1-10.923-20.627a310.278 310.278 0 0 1 10.89-20.637l-.001.001a307.318 307.318 0 0 1 12.413-19.761c7.613-.576 15.42-.876 23.31-.876H128c7.926 0 15.743.303 23.354.883a329.357 329.357 0 0 1 12.335 19.695a358.489 358.489 0 0 1 11.036 20.54a329.472 329.472 0 0 1-11 20.722Zm22.56-122.124c8.572 4.944 11.906 24.881 6.52 51.026c-.344 1.668-.73 3.367-1.15 5.09c-10.622-2.452-22.155-4.275-34.23-5.408c-7.034-10.017-14.323-19.124-21.64-27.008a160.789 160.789 0 0 1 5.888-5.4c18.9-16.447 36.564-22.941 44.612-18.3ZM128 90.808c12.625 0 22.86 10.235 22.86 22.86s-10.235 22.86-22.86 22.86s-22.86-10.235-22.86-22.86s10.235-22.86 22.86-22.86Z"></path></svg>
+</file>
+
+<file path="src/assets/vite.svg">
+<svg xmlns="http://www.w3.org/2000/svg" width="77" height="47" fill="none" aria-labelledby="vite-logo-title" viewBox="0 0 77 47"><title id="vite-logo-title">Vite</title><style>.parenthesis{fill:#000}@media (prefers-color-scheme:dark){.parenthesis{fill:#fff}}</style><path fill="#9135ff" d="M40.151 45.71c-.663.844-2.02.374-2.02-.699V34.708a2.26 2.26 0 0 0-2.262-2.262H24.493c-.92 0-1.457-1.04-.92-1.788l7.479-10.471c1.07-1.498 0-3.578-1.842-3.578H15.443c-.92 0-1.456-1.04-.92-1.788l9.696-13.576c.213-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.472c-1.07 1.497 0 3.578 1.842 3.578h11.376c.944 0 1.474 1.087.89 1.83L40.153 45.712z"/><mask id="a" width="48" height="47" x="14" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha"><path fill="#000" d="M40.047 45.71c-.663.843-2.02.374-2.02-.699V34.708a2.26 2.26 0 0 0-2.262-2.262H24.389c-.92 0-1.457-1.04-.92-1.788l7.479-10.472c1.07-1.497 0-3.578-1.842-3.578H15.34c-.92 0-1.456-1.04-.92-1.788l9.696-13.575c.213-.297.556-.474.92-.474H53.93c.92 0 1.456 1.04.92 1.788L47.37 13.03c-1.07 1.498 0 3.578 1.842 3.578h11.376c.944 0 1.474 1.088.89 1.831L40.049 45.712z"/></mask><g mask="url(#a)"><g filter="url(#b)"><ellipse cx="5.508" cy="14.704" fill="#eee6ff" rx="5.508" ry="14.704" transform="rotate(269.814 20.96 11.29)scale(-1 1)"/></g><g filter="url(#c)"><ellipse cx="10.399" cy="29.851" fill="#eee6ff" rx="10.399" ry="29.851" transform="rotate(89.814 -16.902 -8.275)scale(1 -1)"/></g><g filter="url(#d)"><ellipse cx="5.508" cy="30.487" fill="#8900ff" rx="5.508" ry="30.487" transform="rotate(89.814 -19.197 -7.127)scale(1 -1)"/></g><g filter="url(#e)"><ellipse cx="5.508" cy="30.599" fill="#8900ff" rx="5.508" ry="30.599" transform="rotate(89.814 -25.928 4.177)scale(1 -1)"/></g><g filter="url(#f)"><ellipse cx="5.508" cy="30.599" fill="#8900ff" rx="5.508" ry="30.599" transform="rotate(89.814 -25.738 5.52)scale(1 -1)"/></g><g filter="url(#g)"><ellipse cx="14.072" cy="22.078" fill="#eee6ff" rx="14.072" ry="22.078" transform="rotate(93.35 31.245 55.578)scale(-1 1)"/></g><g filter="url(#h)"><ellipse cx="3.47" cy="21.501" fill="#8900ff" rx="3.47" ry="21.501" transform="rotate(89.009 35.419 55.202)scale(-1 1)"/></g><g filter="url(#i)"><ellipse cx="3.47" cy="21.501" fill="#8900ff" rx="3.47" ry="21.501" transform="rotate(89.009 35.419 55.202)scale(-1 1)"/></g><g filter="url(#j)"><ellipse cx="14.592" cy="9.743" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(39.51 14.592 9.743)"/></g><g filter="url(#k)"><ellipse cx="61.728" cy="-5.321" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 61.728 -5.32)"/></g><g filter="url(#l)"><ellipse cx="55.618" cy="7.104" fill="#00c2ff" rx="5.971" ry="9.665" transform="rotate(37.892 55.618 7.104)"/></g><g filter="url(#m)"><ellipse cx="12.326" cy="39.103" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 12.326 39.103)"/></g><g filter="url(#n)"><ellipse cx="12.326" cy="39.103" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 12.326 39.103)"/></g><g filter="url(#o)"><ellipse cx="49.857" cy="30.678" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 49.857 30.678)"/></g><g filter="url(#p)"><ellipse cx="52.623" cy="33.171" fill="#00c2ff" rx="5.971" ry="15.297" transform="rotate(37.892 52.623 33.17)"/></g></g><path d="M6.919 0c-9.198 13.166-9.252 33.575 0 46.789h6.215c-9.25-13.214-9.196-33.623 0-46.789zm62.424 0h-6.215c9.198 13.166 9.252 33.575 0 46.789h6.215c9.25-13.214 9.196-33.623 0-46.789" class="parenthesis"/><defs><filter id="b" width="60.045" height="41.654" x="-5.564" y="16.92" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="7.659"/></filter><filter id="c" width="90.34" height="51.437" x="-40.407" y="-6.762" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="7.659"/></filter><filter id="d" width="79.355" height="29.4" x="-35.435" y="2.801" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="e" width="79.579" height="29.4" x="-30.84" y="20.8" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="f" width="79.579" height="29.4" x="-29.307" y="21.949" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="g" width="74.749" height="58.852" x="29.961" y="-17.13" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="7.659"/></filter><filter id="h" width="61.377" height="25.362" x="37.754" y="3.055" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="i" width="61.377" height="25.362" x="37.754" y="3.055" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="j" width="56.045" height="63.649" x="-13.43" y="-22.082" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="k" width="54.814" height="64.646" x="34.321" y="-37.644" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="l" width="33.541" height="35.313" x="38.847" y="-10.552" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="m" width="54.814" height="64.646" x="-15.081" y="6.78" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="n" width="54.814" height="64.646" x="-15.081" y="6.78" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="o" width="54.814" height="64.646" x="22.45" y="-1.645" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="p" width="39.409" height="43.623" x="32.919" y="11.36" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter></defs></svg>
+</file>
+
+<file path="src/components/ErrorCenter.tsx">
+export function ErrorCenter() {
+  return null;
+}
+</file>
+
+<file path="src/components/KPIDashboard.tsx">
+import React, { useMemo } from 'react';
+import { useStore } from '../store';
+import { motion } from 'framer-motion';
+
+export function KPIDashboard() {
+  const processedData = useStore(state => state.processedData);
+
+  const kpis = useMemo(() => {
+    let totalPaid = 0;
+    let totalFx = 0;
+    let totalNonFx = 0;
+    let totalExRate = 0;
+    let rateCount = 0;
+    
+    let matched = 0;
+    let unmatched = 0;
+    
+    const facilitators = new Set<string>();
+
+    processedData.forEach(tx => {
+      if (tx.isMatched) {
+        matched++;
+        if (tx.totalFxMarkup !== null) totalFx += tx.totalFxMarkup;
+      } else {
+        unmatched++;
+      }
+      
+      if (tx.amountPaidINR !== null) totalPaid += tx.amountPaidINR;
+      if (tx.totalNonFxFees !== null) totalNonFx += tx.totalNonFxFees;
+      
+      if (tx.exchangeRate !== null) {
+        totalExRate += tx.exchangeRate;
+        rateCount++;
+      }
+      
+      if (tx.facilitator && tx.facilitator !== "Not Found") {
+        facilitators.add(tx.facilitator);
+      }
+    });
+
+    return [
+      { label: 'Total Transactions', value: processedData.length.toLocaleString(), prefix: '' },
+      { label: 'Matched', value: matched.toLocaleString(), prefix: '', color: 'text-success' },
+      { label: 'Unmatched', value: unmatched.toLocaleString(), prefix: '', color: 'text-error' },
+      { label: 'Total Paid (INR)', value: totalPaid.toLocaleString(undefined, { maximumFractionDigits: 0 }), prefix: '₹' },
+      { label: 'Total FX Markup', value: totalFx.toLocaleString(undefined, { maximumFractionDigits: 0 }), prefix: '₹', color: 'text-highlight' },
+      { label: 'Total Non-FX Fees', value: totalNonFx.toLocaleString(undefined, { maximumFractionDigits: 0 }), prefix: '₹' },
+      { label: 'Avg Exchange Rate', value: rateCount ? (totalExRate / rateCount).toFixed(4) : 'N/A', prefix: '₹' },
+      { label: 'Facilitators', value: facilitators.size.toString(), prefix: '' },
+    ];
+  }, [processedData]);
+
+  return (
+    <div className="grid grid-cols-4 xl:grid-cols-8 gap-4 shrink-0">
+      {kpis.map((kpi, i) => (
+        <motion.div
+          key={kpi.label}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: i * 0.05 }}
+          className="bg-surface border border-border rounded-xl p-4 flex flex-col hover:border-border/80 hover:bg-surface-elevated transition-colors group relative overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 w-24 h-24 bg-primary-accent/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110" />
+          <span className="text-xs font-medium text-muted-text uppercase tracking-wider mb-2 relative z-10">{kpi.label}</span>
+          <div className="flex items-baseline gap-1 relative z-10">
+            {kpi.prefix && <span className="text-sm font-medium text-secondary-text">{kpi.prefix}</span>}
+            <span className={`text-2xl font-bold ${kpi.color || 'text-primary-text'}`}>{kpi.value}</span>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/Navigation.tsx">
+import React from 'react';
+import { useStore } from '../store';
+import { Shield, RefreshCw, Activity } from 'lucide-react';
+
+export function Navigation() {
+  const clearSession = useStore(state => state.clearSession);
+
+  return (
+    <header className="h-16 bg-surface border-b border-border flex items-center justify-between px-6 shrink-0 shadow-sm z-10">
+      <div className="flex items-center gap-4">
+        <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-accent/10 text-primary-accent">
+          <Activity size={20} />
+        </div>
+        <h1 className="text-xl font-semibold text-primary-text tracking-tight">Remittance Analytics Copilot</h1>
+        <span className="px-2.5 py-1 text-xs font-medium bg-secondary-accent/10 text-secondary-accent rounded-full border border-secondary-accent/20">
+          PROD
+        </span>
+      </div>
+      
+      <div className="flex items-center gap-6">
+        <div className="flex items-center gap-2 text-sm text-muted-text">
+          <Shield size={16} className="text-success" />
+          <span>Session Only</span>
+          <span className="w-1 h-1 rounded-full bg-border mx-1" />
+          <span>Data Never Stored</span>
+        </div>
+        <button 
+          onClick={clearSession}
+          className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-error hover:bg-error/10 rounded-lg transition-colors border border-transparent hover:border-error/20"
+        >
+          <RefreshCw size={16} />
+          Reset Session
+        </button>
+      </div>
+    </header>
+  );
+}
+</file>
+
+<file path="src/components/QuerySidebar.tsx">
+import React, { useState } from 'react';
+import { useStore, type DatasetType } from '../store';
+import { Search, Database, Download, Sparkles, Clock, Loader2, X } from 'lucide-react';
+import * as XLSX from 'xlsx';
+import { parseQueryWithGeminiAll } from '../lib/gemini';
+import { QuerySchema, executeQuery } from '../lib/queryEngine';
+
+const SUGGESTED_QUERIES = [
+  "Top Facilitators",
+  "Revenue By Vendor",
+  "Highest Markup Transactions",
+  "Unmatched Transactions",
+  "FX Margin By Currency",
+  "Transactions Above ₹5L"
+];
+
+const normalizeRowKeys = (row: any): any => {
+  if (!row) return row;
+  const hasId = 'txnID' in row || 'txnId' in row || 'Txn Id' in row || 'TXN ID' in row || 'id' in row;
+  if (!hasId) {
+    const result: any = {};
+    for (const [key, val] of Object.entries(row)) {
+      if (key.startsWith('merged_')) continue;
+      if (key === 'raw' || key === 'everestRaw' || key === 'bookingsRaw') continue;
+      result[key] = val;
+    }
+    return result;
+  }
+  const rawId = row.txnID || row.txnId || row['Txn Id'] || row['TXN ID'] || row.id || '';
+  const result: any = { txnID: rawId };
+  for (const [key, val] of Object.entries(row)) {
+    if (key.startsWith('merged_')) continue;
+    if (key === 'raw' || key === 'everestRaw' || key === 'bookingsRaw') continue;
+    const low = key.toLowerCase();
+    if (low === 'id' || low === 'txnid' || low === 'txn id' || low === 'txn_id') continue;
+    result[key] = val;
+  }
+  return result;
+};
+
+export function QuerySidebar() {
+  const { 
+    currentDataset, 
+    setCurrentDataset, 
+    processedData, 
+    queryResult, 
+    setQueryResult, 
+    queryHistory, 
+    addQueryToHistory, 
+    currentPlan, 
+    setCurrentPlan, 
+    currentQueryText,
+    transactionsRaw,
+    bookingsRaw,
+    commercialsRaw,
+    vendorsRaw,
+    includeEverestMatched,
+    includeBookingsMatched,
+    unmatchedView,
+    allShowEverest
+  } = useStore();
+  const [query, setQuery] = useState('');
+  const [isQuerying, setIsQuerying] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [showAllHistory, setShowAllHistory] = useState(false);
+
+  React.useEffect(() => {
+    if (!currentPlan) {
+      setQueryResult(null);
+      return;
+    }
+
+    const normalizeId = (id: string): string => {
+      if (!id) return '';
+      return String(id).trim().toUpperCase().replace(/[\u200B-\u200D\uFEFF]/g, '').replace(/[\t\r\n]/g, '').replace(/\s+/g, ' ');
+    };
+    
+    try {
+      let dataToQuery: any[] = [];
+      if (currentDataset === 'everest') {
+        dataToQuery = transactionsRaw;
+      } else if (currentDataset === 'bookings') {
+        dataToQuery = bookingsRaw;
+      } else if (currentDataset === 'commercials') {
+        dataToQuery = commercialsRaw;
+      } else if (currentDataset === 'vendors') {
+        dataToQuery = vendorsRaw;
+      } else if (currentDataset === 'matched') {
+        const baseList = processedData.filter(row => row.isMatched);
+        if (includeEverestMatched && includeBookingsMatched) {
+          dataToQuery = baseList.map(row => row.merged_matched_T_T || row);
+        } else if (includeEverestMatched && !includeBookingsMatched) {
+          dataToQuery = baseList.map(row => row.merged_matched_T_F || row);
+        } else if (!includeEverestMatched && includeBookingsMatched) {
+          dataToQuery = baseList.map(row => row.merged_matched_F_T || row);
+        } else {
+          dataToQuery = baseList.map(row => row.merged_matched_F_F || row);
+        }
+      } else if (currentDataset === 'unmatched') {
+        if (unmatchedView === 'everest') {
+          dataToQuery = processedData.filter(row => !row.isMatched);
+        } else {
+          const everestIds = new Set(processedData.map(r => r.id));
+          dataToQuery = bookingsRaw.filter(b => !everestIds.has(normalizeId(b['TXN ID'])));
+        }
+      } else if (currentDataset === 'all') {
+        dataToQuery = processedData.map(row => 
+          allShowEverest ? (row.merged_all_T || row) : (row.merged_all_F || row)
+        );
+      }
+
+      dataToQuery = dataToQuery.map(row => normalizeRowKeys(row));
+
+      const activePlan = currentPlan[currentDataset];
+      if (activePlan && dataToQuery.length > 0) {
+        const result = executeQuery(dataToQuery, activePlan);
+        setQueryResult(result);
+      } else {
+        setQueryResult(null);
+      }
+    } catch (err: any) {
+      console.error("Failed to re-apply AI plan:", err);
+    }
+  }, [
+    currentDataset, 
+    currentPlan, 
+    processedData, 
+    setQueryResult, 
+    transactionsRaw, 
+    bookingsRaw, 
+    commercialsRaw, 
+    vendorsRaw,
+    includeEverestMatched,
+    includeBookingsMatched,
+    unmatchedView,
+    allShowEverest
+  ]);
+
+  const handleExport = () => {
+    const rawData = queryResult || processedData;
+    if (!rawData || rawData.length === 0) return;
+    
+    const dataToExport = rawData.map(row => normalizeRowKeys(row));
+    const ws = XLSX.utils.json_to_sheet(dataToExport);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Results");
+    XLSX.writeFile(wb, "export.xlsx");
+  };
+
+  const handleQuerySubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!query.trim()) return;
+    
+    setIsQuerying(true);
+    setError(null);
+    try {
+      const everestRaw = useStore.getState().transactionsRaw;
+      const bookingsRaw = useStore.getState().bookingsRaw;
+      const commercialsRaw = useStore.getState().commercialsRaw;
+      const vendorsRaw = useStore.getState().vendorsRaw;
+
+      const getSampleSchema = (data: any[]) => {
+        if (!data || data.length === 0) return [];
+        const sample = data[0];
+        const seen = new Set<string>();
+        const list: { name: string; type: string }[] = [];
+        
+        Object.keys(sample)
+          .filter(k => k !== 'raw' && k !== 'everestRaw' && k !== 'bookingsRaw')
+          .forEach(k => {
+            const low = k.toLowerCase();
+            const isId = low === 'id' || low === 'txnid' || low === 'txn id' || low === 'txn_id';
+            const name = isId ? 'txnID' : k;
+            if (!seen.has(name)) {
+              seen.add(name);
+              list.push({ name, type: typeof sample[k] });
+            }
+          });
+        return list;
+      };
+
+      const everestSchema = getSampleSchema(everestRaw);
+      const bookingsSchema = getSampleSchema(bookingsRaw);
+      const commercialsSchema = getSampleSchema(commercialsRaw);
+      const vendorsSchema = getSampleSchema(vendorsRaw);
+
+      const matchedSchema = [
+        ...getSampleSchema(processedData.filter(r => r.isMatched)),
+        ...everestSchema.filter(e => !['txnID', 'Exchange Rate', 'Amount paid (INR)', 'Foreign Currency Amount Received'].includes(e.name)),
+        ...bookingsSchema.filter(b => !['txnID', 'Exchange Rate', 'Book Rate', 'Facilitator'].includes(b.name))
+      ];
+
+      const unmatchedSchema = [
+        ...getSampleSchema(processedData.filter(r => !r.isMatched)),
+        ...everestSchema.filter(e => e.name !== 'txnID')
+      ];
+
+      const allSchema = matchedSchema;
+
+      const schemas = {
+        matched: matchedSchema,
+        unmatched: unmatchedSchema,
+        all: allSchema,
+        everest: everestSchema,
+        bookings: bookingsSchema,
+        commercials: commercialsSchema,
+        vendors: vendorsSchema
+      };
+
+      const planRawMap = await parseQueryWithGeminiAll(query, schemas);
+      const parsedPlans: Record<string, any> = {};
+      
+      Object.keys(planRawMap).forEach(key => {
+        const rawPlan = planRawMap[key];
+        if (rawPlan && rawPlan.operations && rawPlan.operations.length > 0) {
+          try {
+            parsedPlans[key] = QuerySchema.parse(rawPlan);
+          } catch (err) {
+            console.error(`Failed to parse schema plan for ${key}:`, err);
+          }
+        }
+      });
+
+      const activePlan = parsedPlans[currentDataset];
+      if (activePlan) {
+        let dataToQuery: any[] = [];
+        if (currentDataset === 'everest') {
+          dataToQuery = everestRaw;
+        } else if (currentDataset === 'bookings') {
+          dataToQuery = bookingsRaw;
+        } else if (currentDataset === 'commercials') {
+          dataToQuery = commercialsRaw;
+        } else if (currentDataset === 'vendors') {
+          dataToQuery = vendorsRaw;
+        } else {
+          if (currentDataset === 'matched') {
+            dataToQuery = processedData.filter(row => row.isMatched).map(row => row.merged_matched_T_T || row);
+          } else if (currentDataset === 'unmatched') {
+            dataToQuery = processedData.filter(row => !row.isMatched);
+          } else { // 'all'
+            dataToQuery = processedData.map(row => row.merged_all_T || row);
+          }
+        }
+        dataToQuery = dataToQuery.map(row => normalizeRowKeys(row));
+        const result = executeQuery(dataToQuery, activePlan);
+        setQueryResult(result);
+      } else {
+        setQueryResult(null);
+      }
+
+      setCurrentPlan(parsedPlans, query);
+      addQueryToHistory(query, parsedPlans);
+      setQuery('');
+    } catch (err: any) {
+      setError(err.message || "Failed to execute query.");
+      setQueryResult(null);
+    } finally {
+      setIsQuerying(false);
+    }
+  };
+
+  const executeHistoryQuery = (hq: any) => {
+    setCurrentPlan(hq.plan, hq.query);
+  };
+
+  return (
+    <div className="w-80 flex flex-col gap-4 overflow-y-auto">
+      {/* Search Input */}
+      <div className="bg-surface border border-border rounded-xl p-4 flex flex-col gap-3">
+        {currentPlan && currentPlan[currentDataset] && (() => {
+          const plan = currentPlan[currentDataset];
+          if (!plan || !plan.operations) return null;
+          const filterOps = plan.operations.filter((op: any) => op.type === 'filter');
+          if (filterOps.length === 0) return null;
+          const fields = Array.from(new Set(filterOps.map((op: any) => op.field))).join(', ');
+          
+          return (
+            <div className="flex flex-wrap gap-1 mb-1">
+              <div className="text-[10px] px-2 py-0.5 rounded-full border bg-emerald-500/10 border-emerald-500/30 text-emerald-500 font-semibold shadow-sm transition-all">
+                <span className="capitalize">{currentDataset}</span> Filtered: {fields}
+              </div>
+            </div>
+          );
+        })()}
+        <form onSubmit={handleQuerySubmit} className="relative">
+          <Sparkles className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 ${currentPlan ? 'text-primary-accent' : 'text-primary-accent'}`} />
+          <input
+            type="text"
+            value={currentPlan ? currentQueryText || '' : query}
+            onChange={(e) => !currentPlan && setQuery(e.target.value)}
+            disabled={isQuerying || !!currentPlan}
+            placeholder="Ask anything about your data..."
+            className={`w-full bg-background border rounded-lg pl-10 py-3 text-sm focus:outline-none transition-all placeholder:text-muted-text ${
+              currentPlan 
+                ? 'border-primary-accent/50 text-primary-accent pr-10' 
+                : 'border-border text-primary-text pr-10 focus:border-primary-accent focus:ring-1 focus:ring-primary-accent disabled:opacity-50'
+            }`}
+          />
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
+            {!currentPlan && isQuerying && <Loader2 className="text-primary-accent w-4 h-4 animate-spin" />}
+            {!currentPlan && !isQuerying && (
+              <button
+                type="submit"
+                className="text-muted-text hover:text-primary-accent transition-colors"
+                title="Search query"
+              >
+                <Search className="w-5 h-5" />
+              </button>
+            )}
+            {currentPlan && (
+              <button
+                type="button"
+                onClick={() => setCurrentPlan(null)}
+                className="text-error hover:text-error/80 transition-colors"
+                title="Clear active filter"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            )}
+          </div>
+        </form>
+        {error && <p className="text-xs text-error">{error}</p>}
+
+        {queryHistory.length > 0 && (
+          <div className="mt-2 pt-2 border-t border-border/50">
+            <h3 className="text-xs font-semibold text-primary-text mb-2 flex items-center gap-1.5">
+              <Clock size={12} /> History
+            </h3>
+            <div className="space-y-1.5 max-h-48 overflow-y-auto">
+              {(showAllHistory ? queryHistory : queryHistory.slice(0, 3)).map((hq, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => executeHistoryQuery(hq)}
+                  className="w-full text-left px-2 py-1.5 bg-background border border-border rounded-md text-[11px] text-secondary-text hover:text-primary-text hover:border-primary-accent/50 transition-colors truncate"
+                  title={hq.query}
+                >
+                  {hq.query}
+                </button>
+              ))}
+              {queryHistory.length > 3 && (
+                <button
+                  type="button"
+                  onClick={() => setShowAllHistory(!showAllHistory)}
+                  className="w-full text-center text-[11px] font-semibold text-primary-accent hover:text-primary-accent/80 mt-1"
+                >
+                  {showAllHistory ? 'Show Less' : 'Show All'}
+                </button>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Dataset Selector */}
+      <div className="bg-surface border border-border rounded-xl p-4">
+        <h3 className="text-sm font-semibold text-primary-text mb-3 flex items-center gap-2">
+          <Database size={16} /> Dataset Scope
+        </h3>
+        <div className="space-y-2">
+          {(['matched', 'unmatched', 'all', 'everest', 'bookings', 'commercials', 'vendors'] as DatasetType[]).map((type) => (
+            <button
+              key={type}
+              onClick={() => setCurrentDataset(type)}
+              className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors ${
+                currentDataset === type 
+                  ? 'bg-primary-accent/10 text-primary-accent font-medium border border-primary-accent/20' 
+                  : 'text-secondary-text hover:bg-surface-elevated border border-transparent'
+              }`}
+            >
+              <span className="capitalize">{type}</span>
+              {currentDataset === type && <div className="w-2 h-2 rounded-full bg-primary-accent" />}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Suggested Queries */}
+      <div className="bg-surface border border-border rounded-xl p-4 flex-1">
+        <h3 className="text-sm font-semibold text-primary-text mb-3 flex items-center gap-2">
+          <Search size={16} /> Suggested
+        </h3>
+        <div className="flex flex-wrap gap-2">
+          {SUGGESTED_QUERIES.map(q => (
+            <button
+              key={q}
+              onClick={() => setQuery(q)}
+              className="px-3 py-1.5 bg-background border border-border rounded-full text-xs text-secondary-text hover:text-primary-text hover:border-primary-accent/50 transition-colors text-left"
+            >
+              {q}
+            </button>
+          ))}
+        </div>
+      </div>
+      
+      {/* Actions */}
+      <div className="bg-surface border border-border rounded-xl p-4">
+        <button
+          onClick={handleExport}
+          className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-secondary-background border border-border rounded-lg text-sm font-medium text-primary-text hover:bg-surface-elevated transition-colors"
+        >
+          <Download size={16} />
+          Export Current View
+        </button>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/ResultsArea.tsx">
+import React, { useState, useMemo } from 'react';
+import { useStore } from '../store';
+import { Table, Filter, ArrowUp, ArrowDown, ArrowUpDown, XCircle, Plus, X, Copy, Check } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useVirtualizer } from '@tanstack/react-virtual';
+// Dynamic charts can be built here using Recharts based on data shape
+
+export function ResultsArea() {
+  const { 
+    processedData, 
+    queryResult, 
+    currentDataset,
+    filters,
+    setFilters,
+    sortConfig,
+    setSortConfig,
+    tabs,
+    activeTabId,
+    addTab,
+    closeTab,
+    setActiveTabId,
+    includeEverestMatched,
+    setIncludeEverestMatched,
+    includeBookingsMatched,
+    setIncludeBookingsMatched,
+    unmatchedView,
+    setUnmatchedView,
+    allShowEverest,
+    setAllShowEverest,
+    transactionsRaw,
+    bookingsRaw,
+    commercialsRaw,
+    vendorsRaw
+  } = useStore();
+
+  const [selectedRowKey, setSelectedRowKey] = useState<string | number | null>(null);
+  const [selectedRow, setSelectedRow] = useState<any | null>(null);
+  const [copiedText, setCopiedText] = useState<string | null>(null);
+
+  const handleCopy = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedText(text);
+    setTimeout(() => setCopiedText(null), 1500);
+  };
+
+  React.useEffect(() => {
+    setSelectedRowKey(null);
+    setSelectedRow(null);
+    setCopiedText(null);
+  }, [currentDataset, activeTabId, includeEverestMatched, includeBookingsMatched, unmatchedView, allShowEverest]);
+
+  const normalizeRowKeys = (row: any): any => {
+    if (!row) return row;
+    const hasId = 'txnID' in row || 'txnId' in row || 'Txn Id' in row || 'TXN ID' in row || 'id' in row;
+    if (!hasId) {
+      const result: any = {};
+      for (const [key, val] of Object.entries(row)) {
+        if (key.startsWith('merged_')) continue;
+        if (key === 'raw' || key === 'everestRaw' || key === 'bookingsRaw') continue;
+        result[key] = val;
+      }
+      return result;
+    }
+    const rawId = row.txnID || row.txnId || row['Txn Id'] || row['TXN ID'] || row.id || '';
+    const result: any = { txnID: rawId };
+    for (const [key, val] of Object.entries(row)) {
+      if (key.startsWith('merged_')) continue;
+      if (key === 'raw' || key === 'everestRaw' || key === 'bookingsRaw') continue;
+      const low = key.toLowerCase();
+      if (low === 'id' || low === 'txnid' || low === 'txn id' || low === 'txn_id') continue;
+      result[key] = val;
+    }
+    return result;
+  };
+
+  const normalizeId = (id: string): string => {
+    if (!id) return '';
+    return String(id).trim().toUpperCase().replace(/[\u200B-\u200D\uFEFF]/g, '').replace(/[\t\r\n]/g, '').replace(/\s+/g, ' ');
+  };
+
+  const everestIdsSet = useMemo(() => {
+    const ids = new Set<string>();
+    for (const r of processedData) {
+      if (r.id) ids.add(r.id);
+    }
+    return ids;
+  }, [processedData]);
+
+  const displayData = useMemo(() => {
+    let list: any[] = [];
+    if (currentDataset === 'everest') list = queryResult || transactionsRaw;
+    else if (currentDataset === 'bookings') list = queryResult || bookingsRaw;
+    else if (currentDataset === 'commercials') list = queryResult || commercialsRaw;
+    else if (currentDataset === 'vendors') list = queryResult || vendorsRaw;
+    else if (currentDataset === 'matched') {
+      if (queryResult) {
+        list = queryResult;
+      } else {
+        const baseList = processedData.filter(row => row.isMatched);
+        if (includeEverestMatched && includeBookingsMatched) {
+          list = baseList.map(row => row.merged_matched_T_T || row);
+        } else if (includeEverestMatched && !includeBookingsMatched) {
+          list = baseList.map(row => row.merged_matched_T_F || row);
+        } else if (!includeEverestMatched && includeBookingsMatched) {
+          list = baseList.map(row => row.merged_matched_F_T || row);
+        } else {
+          list = baseList.map(row => row.merged_matched_F_F || row);
+        }
+      }
+    }
+    else if (currentDataset === 'unmatched') {
+      if (queryResult) {
+        list = queryResult;
+      } else {
+        if (unmatchedView === 'everest') {
+          list = processedData.filter(row => !row.isMatched);
+        } else {
+          list = bookingsRaw.filter(b => !everestIdsSet.has(normalizeId(b['TXN ID'])));
+        }
+      }
+    }
+    else if (currentDataset === 'all') {
+      if (queryResult) {
+        list = queryResult;
+      } else {
+        if (allShowEverest) {
+          list = processedData.map(row => row.merged_all_T || row);
+        } else {
+          list = processedData.map(row => row.merged_all_F || row);
+        }
+      }
+    }
+
+    return list.map((row, idx) => {
+      const normalized = normalizeRowKeys(row);
+      normalized._rowIdx = idx;
+      return normalized;
+    });
+  }, [processedData, queryResult, currentDataset, includeEverestMatched, includeBookingsMatched, unmatchedView, allShowEverest, transactionsRaw, bookingsRaw, commercialsRaw, vendorsRaw, everestIdsSet]);
+
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState<number | 'all'>(100);
+  
+  const columns = useMemo(() => {
+    if (displayData.length === 0) return [];
+    return Object.keys(displayData[0]).filter(k => k !== 'raw' && k !== 'everestRaw' && k !== 'bookingsRaw' && k !== '_rowIdx');
+  }, [displayData]);
+
+  const [activeFilterCol, setActiveFilterCol] = useState<string | null>(null);
+
+  React.useEffect(() => {
+    setActiveFilterCol(null);
+    setPage(0);
+  }, [currentDataset, queryResult, activeTabId]);
+
+  const filteredAndSortedData = useMemo(() => {
+    let result = [...displayData];
+
+    Object.keys(filters).forEach(key => {
+      const filter = filters[key];
+      if (!filter) return;
+
+      result = result.filter(row => {
+        const val = row[key];
+        if (filter.type === 'exact') {
+          return String(val) === filter.value;
+        }
+        if (filter.type === 'numberRange') {
+          const num = typeof val === 'number' ? val : Number(String(val || '').replace(/,/g, '').trim());
+          if (isNaN(num)) return false;
+          if (filter.min !== undefined && filter.min !== '' && num < Number(filter.min)) return false;
+          if (filter.max !== undefined && filter.max !== '' && num > Number(filter.max)) return false;
+          return true;
+        }
+        if (filter.type === 'search') {
+          if (!val) return false;
+          return String(val).toLowerCase().includes(filter.value.toLowerCase());
+        }
+        if (filter.type === 'dateRange') {
+          if (!val) return false;
+          const d = new Date(val).getTime();
+          if (isNaN(d)) return false;
+          if (filter.start && d < new Date(filter.start).getTime()) return false;
+          // For end date, we add a day minus 1 ms so it includes the whole day
+          if (filter.end && d > new Date(filter.end).getTime() + 86399999) return false;
+          return true;
+        }
+        return true;
+      });
+    });
+
+    if (sortConfig) {
+      const sampleVal = result.length > 0 ? result[0][sortConfig.key] : null;
+      const isDateCol = typeof sampleVal === 'string' && (
+        sortConfig.key.toLowerCase().includes('date') || 
+        sortConfig.key.toLowerCase().includes('time') || 
+        (sampleVal.length > 5 && !isNaN(Date.parse(sampleVal)) && isNaN(Number(sampleVal)))
+      );
+
+      result.sort((a, b) => {
+        let valA = a[sortConfig.key];
+        let valB = b[sortConfig.key];
+        
+        if (isDateCol) {
+          if (typeof valA === 'string') {
+            const p = Date.parse(valA);
+            if (!isNaN(p)) valA = p;
+          }
+          if (typeof valB === 'string') {
+            const p = Date.parse(valB);
+            if (!isNaN(p)) valB = p;
+          }
+        }
+
+        if (valA === valB) return 0;
+        if (valA === null || valA === undefined) return 1;
+        if (valB === null || valB === undefined) return -1;
+        
+        const asc = sortConfig.direction === 'asc' ? 1 : -1;
+        return valA > valB ? asc : -asc;
+      });
+    }
+
+    return result;
+  }, [displayData, filters, sortConfig]);
+
+  const resolvedPageSize = useMemo(() => {
+    if (pageSize === 'all') return filteredAndSortedData.length || 1;
+    return pageSize;
+  }, [pageSize, filteredAndSortedData.length]);
+
+  const paginatedData = useMemo(() => {
+    return filteredAndSortedData.slice(page * resolvedPageSize, (page + 1) * resolvedPageSize);
+  }, [filteredAndSortedData, page, resolvedPageSize]);
+
+  const totalPages = Math.ceil(filteredAndSortedData.length / resolvedPageSize);
+
+  const parentRef = React.useRef<HTMLDivElement>(null);
+  
+  const rowVirtualizer = useVirtualizer({
+    count: paginatedData.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 37,
+    overscan: 15,
+  });
+
+  const virtualItems = rowVirtualizer.getVirtualItems();
+  const totalSize = rowVirtualizer.getTotalSize();
+
+  const paddingTop = virtualItems.length > 0 ? virtualItems[0].start : 0;
+  const paddingBottom = virtualItems.length > 0 ? totalSize - virtualItems[virtualItems.length - 1].end : 0;
+
+  React.useEffect(() => {
+    if (parentRef.current) {
+      parentRef.current.scrollTop = 0;
+    }
+  }, [page, currentDataset, queryResult]);
+
+  const getColFilterInfo = (col: string) => {
+    if (col.toLowerCase().includes('date')) return { type: 'date' };
+    const vals = Array.from(new Set(displayData.map(r => r[col]))).filter(v => v !== null && v !== undefined && v !== '');
+    if (vals.length === 0) return { type: 'none' };
+    
+    const isNumeric = vals.every(v => {
+      if (typeof v === 'number') return true;
+      const stripped = String(v).replace(/,/g, '').trim();
+      return stripped !== '' && !isNaN(Number(stripped));
+    });
+    
+    if (isNumeric) return { type: 'number' };
+    if (vals.length <= 20) return { type: 'categorical', options: vals.map(String).sort() };
+    return { type: 'string' };
+  };
+
+  return (
+    <div className="flex flex-col h-full overflow-hidden">
+      {/* Chrome-like Tabs header */}
+      <div className="flex items-end bg-surface-elevated px-4 pt-2 border-b border-border shrink-0 select-none overflow-x-auto gap-1">
+        {tabs.map((t) => {
+          const isActive = t.id === activeTabId;
+          return (
+            <div
+              key={t.id}
+              onClick={() => setActiveTabId(t.id)}
+              className={`group flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-t-lg transition-all cursor-pointer border-t border-x ${
+                isActive
+                  ? 'bg-background border-border text-primary-text'
+                  : 'bg-transparent border-transparent text-muted-text hover:bg-surface hover:text-secondary-text'
+              }`}
+            >
+              <span>{t.name}</span>
+              {tabs.length > 1 && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    closeTab(t.id);
+                  }}
+                  className="text-muted-text hover:text-error opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <X size={12} />
+                </button>
+              )}
+            </div>
+          );
+        })}
+        <button
+          onClick={addTab}
+          className="flex items-center justify-center p-1 hover:bg-surface rounded-full text-secondary-text mb-1.5 ml-2 transition-colors"
+          title="Add Tab"
+        >
+          <Plus size={14} />
+        </button>
+      </div>
+
+      <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-surface shrink-0">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <Table size={16} className="text-secondary-text" />
+            <span className="text-sm font-medium text-primary-text">Data Explorer</span>
+          </div>
+          {currentDataset === 'matched' && (
+            <div className="flex items-center gap-4 ml-4 pl-4 border-l border-border text-xs">
+              <label className="flex items-center gap-1.5 cursor-pointer text-secondary-text hover:text-primary-text select-none">
+                <input 
+                  type="checkbox" 
+                  checked={includeEverestMatched} 
+                  onChange={(e) => setIncludeEverestMatched(e.target.checked)}
+                  className="rounded border-border text-primary-accent focus:ring-primary-accent bg-background" 
+                />
+                Include Everest
+              </label>
+              <label className="flex items-center gap-1.5 cursor-pointer text-secondary-text hover:text-primary-text select-none">
+                <input 
+                  type="checkbox" 
+                  checked={includeBookingsMatched} 
+                  onChange={(e) => setIncludeBookingsMatched(e.target.checked)}
+                  className="rounded border-border text-primary-accent focus:ring-primary-accent bg-background" 
+                />
+                Include Booking Rate
+              </label>
+            </div>
+          )}
+          {currentDataset === 'unmatched' && (
+            <div className="flex items-center gap-4 ml-4 pl-4 border-l border-border text-xs font-semibold">
+              <label className="flex items-center gap-1.5 cursor-pointer text-secondary-text hover:text-primary-text select-none font-medium">
+                <input 
+                  type="radio" 
+                  name="unmatchedView"
+                  checked={unmatchedView === 'everest'} 
+                  onChange={() => setUnmatchedView('everest')}
+                  className="border-border text-primary-accent focus:ring-primary-accent bg-background" 
+                />
+                Unmatched Everest
+              </label>
+              <label className="flex items-center gap-1.5 cursor-pointer text-secondary-text hover:text-primary-text select-none font-medium">
+                <input 
+                  type="radio" 
+                  name="unmatchedView"
+                  checked={unmatchedView === 'bookings'} 
+                  onChange={() => setUnmatchedView('bookings')}
+                  className="border-border text-primary-accent focus:ring-primary-accent bg-background" 
+                />
+                Unmatched Booking Rate
+              </label>
+            </div>
+          )}
+          {currentDataset === 'all' && (
+            <div className="flex items-center gap-4 ml-4 pl-4 border-l border-border text-xs">
+              <label className="flex items-center gap-1.5 cursor-pointer text-secondary-text hover:text-primary-text select-none">
+                <input 
+                  type="checkbox" 
+                  checked={allShowEverest} 
+                  onChange={(e) => setAllShowEverest(e.target.checked)}
+                  className="rounded border-border text-primary-accent focus:ring-primary-accent bg-background" 
+                />
+                Show Everest Data
+              </label>
+            </div>
+          )}
+        </div>
+        <div className="flex items-center gap-4 text-sm text-muted-text">
+          {Object.keys(filters).length > 0 && (
+             <button onClick={() => setFilters({})} className="flex items-center gap-1 text-error hover:text-error/80 mr-2 font-medium">
+               <XCircle size={14} /> Clear Filters
+             </button>
+          )}
+          Showing {filteredAndSortedData.length.toLocaleString()} rows
+        </div>
+      </div>
+
+      <div className="flex-1 overflow-hidden relative bg-background">
+        <div className="absolute inset-0 flex flex-col overflow-hidden">
+          <div ref={parentRef} className="flex-1 overflow-auto">
+            <table className="w-full text-left text-sm text-secondary-text">
+              <thead className="text-xs uppercase bg-surface-elevated text-primary-text sticky top-0 z-10 shadow-sm">
+                <tr>
+                  {columns.map(col => (
+                    <th key={col} className="px-4 py-3 font-semibold whitespace-nowrap relative">
+                      <div className="flex items-center gap-2">
+                        <span>{col}</span>
+                        <div className="flex items-center gap-1">
+                          <button 
+                            onClick={() => setSortConfig({ key: col, direction: sortConfig?.key === col && sortConfig.direction === 'asc' ? 'desc' : 'asc' })} 
+                            className="text-muted-text hover:text-primary-accent"
+                          >
+                            {sortConfig?.key === col ? (sortConfig.direction === 'asc' ? <ArrowUp size={14} /> : <ArrowDown size={14} />) : <ArrowUpDown size={14} />}
+                          </button>
+                          <button 
+                            onClick={() => setActiveFilterCol(activeFilterCol === col ? null : col)} 
+                            className={`hover:text-primary-accent ${filters[col] ? 'text-primary-accent' : 'text-muted-text'}`}
+                          >
+                            <Filter size={14} />
+                          </button>
+                        </div>
+                      </div>
+                      
+                      {activeFilterCol === col && (() => {
+                        const info = getColFilterInfo(col);
+                        return (
+                          <div className="absolute top-full left-0 mt-1 bg-surface-elevated border border-border rounded-lg shadow-xl p-3 z-50 min-w-[200px] font-normal normal-case text-primary-text">
+                             {info.type === 'date' && (
+                                <div className="flex flex-col gap-2">
+                                   <label className="text-xs text-secondary-text">Start Date</label>
+                                   <input type="date" className="bg-background border border-border rounded px-2 py-1 text-sm focus:border-primary-accent outline-none" 
+                                      onChange={e => setFilters({ ...filters, [col]: { ...filters[col], type: 'dateRange', start: e.target.value } })}
+                                      value={filters[col]?.start || ''}
+                                   />
+                                   <label className="text-xs text-secondary-text mt-1">End Date</label>
+                                   <input type="date" className="bg-background border border-border rounded px-2 py-1 text-sm focus:border-primary-accent outline-none" 
+                                      onChange={e => setFilters({ ...filters, [col]: { ...filters[col], type: 'dateRange', end: e.target.value } })}
+                                      value={filters[col]?.end || ''}
+                                   />
+                                </div>
+                             )}
+                             {info.type === 'number' && (
+                                <div className="flex flex-col gap-2">
+                                   <label className="text-xs text-secondary-text">Min Value</label>
+                                   <input type="number" step="any" className="bg-background border border-border rounded px-2 py-1 text-sm focus:border-primary-accent outline-none" 
+                                      onChange={e => setFilters({ ...filters, [col]: { ...filters[col], type: 'numberRange', min: e.target.value } })}
+                                      value={filters[col]?.min || ''}
+                                   />
+                                   <label className="text-xs text-secondary-text mt-1">Max Value</label>
+                                   <input type="number" step="any" className="bg-background border border-border rounded px-2 py-1 text-sm focus:border-primary-accent outline-none" 
+                                      onChange={e => setFilters({ ...filters, [col]: { ...filters[col], type: 'numberRange', max: e.target.value } })}
+                                      value={filters[col]?.max || ''}
+                                   />
+                                </div>
+                             )}
+                             {info.type === 'categorical' && (
+                                <div className="flex flex-col gap-2">
+                                   <label className="text-xs text-secondary-text">Select Option</label>
+                                   <select className="bg-background border border-border rounded px-2 py-1 text-sm focus:border-primary-accent outline-none w-full"
+                                      onChange={e => setFilters(e.target.value ? { ...filters, [col]: { type: 'exact', value: e.target.value } } : (() => { const nf = {...filters}; delete nf[col]; return nf; })())}
+                                      value={filters[col]?.value || ''}
+                                   >
+                                      <option value="">All</option>
+                                      {(info as any).options.map((val: string) => <option key={val} value={val}>{val.length > 50 ? val.substring(0, 50) + '...' : val}</option>)}
+                                   </select>
+                                </div>
+                             )}
+                             {info.type === 'string' && (
+                                <div className="flex flex-col gap-2">
+                                   <label className="text-xs text-secondary-text">Search Text</label>
+                                   <input type="text" placeholder="Search..." className="bg-background border border-border rounded px-2 py-1 text-sm focus:border-primary-accent outline-none w-full"
+                                      onChange={e => setFilters(e.target.value ? { ...filters, [col]: { type: 'search', value: e.target.value } } : (() => { const nf = {...filters}; delete nf[col]; return nf; })())}
+                                      value={filters[col]?.value || ''}
+                                   />
+                                </div>
+                             )}
+                             {info.type === 'none' && (
+                                <p className="text-xs text-muted-text">No data to filter</p>
+                             )}
+                             <div className="flex justify-between mt-3 pt-2 border-t border-border">
+                               <button onClick={() => setFilters((() => { const nf = {...filters}; delete nf[col]; return nf; })())} className="text-xs text-error font-medium hover:text-error/80">Clear</button>
+                               <button onClick={() => setActiveFilterCol(null)} className="text-xs text-primary-accent font-medium hover:text-primary-accent/80">Close</button>
+                             </div>
+                          </div>
+                        );
+                      })()}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {paddingTop > 0 && (
+                  <tr>
+                    <td colSpan={columns.length} style={{ height: `${paddingTop}px` }} />
+                  </tr>
+                )}
+                {virtualItems.map(virtualRow => {
+                  const row = paginatedData[virtualRow.index];
+                  if (!row) return null;
+                  const rowKey = row._rowIdx;
+                  const isSelected = selectedRowKey === rowKey;
+                  return (
+                    <tr
+                      key={virtualRow.key}
+                      data-index={virtualRow.index}
+                      ref={rowVirtualizer.measureElement}
+                      onClick={() => {
+                        const newKey = selectedRowKey === rowKey ? null : rowKey;
+                        setSelectedRowKey(newKey);
+                      }}
+                      onDoubleClick={() => {
+                        setSelectedRowKey(rowKey);
+                        setSelectedRow(row);
+                      }}
+                      className={`border-b border-border transition-colors cursor-pointer select-none ${
+                        isSelected 
+                          ? 'bg-primary-accent/15 hover:bg-primary-accent/20' 
+                          : 'hover:bg-surface/50'
+                      }`}
+                    >
+                      {columns.map(col => {
+                        const val = row[col];
+                        const displayVal = val === null || val === undefined ? 'N/A' 
+                          : typeof val === 'number' ? val.toLocaleString(undefined, { maximumFractionDigits: 4 }) 
+                          : String(val);
+                        return (
+                          <td key={col} className={`px-4 py-2 whitespace-nowrap ${val === null ? 'text-muted-text italic' : 'text-primary-text'}`}>
+                            {displayVal}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
+                {paddingBottom > 0 && (
+                  <tr>
+                    <td colSpan={columns.length} style={{ height: `${paddingBottom}px` }} />
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+          
+          {/* Pagination */}
+          <div className="flex items-center justify-between px-4 py-3 border-t border-border bg-surface shrink-0">
+            <div className="flex items-center gap-2 text-sm text-secondary-text">
+              <span>Rows per page:</span>
+              <select
+                value={pageSize}
+                onChange={e => {
+                  const val = e.target.value;
+                  setPageSize(val === 'all' ? 'all' : Number(val));
+                  setPage(0);
+                }}
+                className="bg-surface-elevated border border-border rounded px-2 py-1 focus:border-primary-accent outline-none text-xs"
+              >
+                <option value={50}>50</option>
+                <option value={100}>100</option>
+                <option value={250}>250</option>
+                <option value={500}>500</option>
+                <option value={1000}>1000</option>
+                <option value="all">All</option>
+              </select>
+            </div>
+
+            {totalPages > 1 && (
+              <div className="flex items-center gap-4">
+                <button 
+                  onClick={() => setPage(p => Math.max(0, p - 1))}
+                  disabled={page === 0}
+                  className="px-3 py-1 text-sm bg-surface-elevated rounded border border-border disabled:opacity-50"
+                >
+                  Previous
+                </button>
+                <span className="text-sm text-secondary-text">Page {page + 1} of {totalPages}</span>
+                <button 
+                  onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
+                  disabled={page === totalPages - 1}
+                  className="px-3 py-1 text-sm bg-surface-elevated rounded border border-border disabled:opacity-50"
+                >
+                  Next
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Detail Modal */}
+      <AnimatePresence>
+        {selectedRow && (
+          <div 
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm cursor-pointer"
+            onClick={() => {
+              setSelectedRow(null);
+              setSelectedRowKey(null);
+            }}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-2xl bg-surface border border-border rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh] cursor-default"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-surface-elevated">
+                <div className="flex items-center gap-2">
+                  <Table className="text-primary-accent" size={20} />
+                  <h3 className="text-lg font-semibold text-primary-text">Row Details</h3>
+                </div>
+                <button 
+                  onClick={() => {
+                    setSelectedRow(null);
+                    setSelectedRowKey(null);
+                  }}
+                  className="text-secondary-text hover:text-primary-text transition-colors p-1 hover:bg-border/30 rounded"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              {/* Scrollable Content */}
+              <div className="flex-1 overflow-y-auto p-6 space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {Object.entries(selectedRow)
+                    .filter(([key, val]) => {
+                      if (key.startsWith('merged_')) return false;
+                      if (key === 'everestRaw' || key === 'bookingsRaw' || key === 'raw' || key === '_rowIdx') return false;
+                      if (typeof val === 'object' && val !== null) return false;
+                      return true;
+                    })
+                    .sort((a, b) => {
+                      const isIdKey = (k: string) => {
+                        const low = k.toLowerCase();
+                        return low === 'id' || low === 'txnid' || low === 'txn id' || low === 'txn_id';
+                      };
+                      const isA = isIdKey(a[0]);
+                      const isB = isIdKey(b[0]);
+                      if (isA && !isB) return -1;
+                      if (!isA && isB) return 1;
+                      return 0;
+                    })
+                    .map(([key, val]) => {
+                      const displayVal = val === null || val === undefined ? 'N/A' 
+                        : typeof val === 'number' ? val.toLocaleString(undefined, { maximumFractionDigits: 4 }) 
+                        : String(val);
+                      
+                      // Convert camelCase or raw keys to readable keys
+                      const readableKey = key
+                        .replace(/([A-Z])/g, ' $1')
+                        .replace(/^./, str => str.toUpperCase())
+                        .trim();
+
+                      const isIdKey = (k: string) => {
+                        const low = k.toLowerCase();
+                        return low === 'id' || low === 'txnid' || low === 'txn id' || low === 'txn_id';
+                      };
+                      const isId = isIdKey(key);
+
+                      return (
+                        <div 
+                          key={key} 
+                          className={`relative border rounded-lg p-3 flex flex-col justify-between min-h-[72px] ${
+                            isId 
+                              ? 'bg-primary-accent/5 border-primary-accent/30 md:col-span-2' 
+                              : 'bg-background/40 border-border/40'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-semibold text-secondary-text uppercase tracking-wider">
+                              {readableKey}
+                            </span>
+                            {isId && !!val && (
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleCopy(String(val));
+                                }}
+                                className="text-secondary-text hover:text-primary-accent transition-colors p-1 hover:bg-border/30 rounded"
+                                title="Copy ID"
+                              >
+                                {copiedText === String(val) ? (
+                                  <Check className="text-success" size={14} />
+                                ) : (
+                                  <Copy size={14} />
+                                )}
+                              </button>
+                            )}
+                          </div>
+                          <span className={`text-sm font-medium mt-1 break-all ${isId ? 'font-mono text-primary-accent' : ''} ${val === null ? 'text-muted-text italic' : 'text-primary-text'}`}>
+                            {displayVal}
+                          </span>
+                        </div>
+                      );
+                    })}
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="px-6 py-3 border-t border-border bg-surface-elevated flex justify-end">
+                <button
+                  onClick={() => {
+                    setSelectedRow(null);
+                    setSelectedRowKey(null);
+                  }}
+                  className="px-4 py-2 bg-border hover:bg-border/80 text-primary-text rounded-lg text-sm font-medium transition-colors"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/UploadSection.tsx">
+import React, { useState } from 'react';
+import { useStore } from '../store';
+import { Database, AlertTriangle, CheckCircle2, Loader2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { SignJWT, importPKCS8 } from 'jose';
+import { saveCache, getCache } from '../lib/db';
+// @ts-ignore
+import credentials from '../../my-sheets-498400-ade16eec1d63.json';
+
+export function UploadSection() {
+  const { setTransactionsRaw, setBookingsRaw, setCommercialsRaw, setVendorsRaw, processData, transactionsRaw, bookingsRaw, commercialsRaw, vendorsRaw } = useStore();
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  React.useEffect(() => {
+    const checkCacheAndLoad = async () => {
+      try {
+        const cachedEverest = await getCache('everest');
+        const cachedBookings = await getCache('bookings');
+        const cachedCommercials = await getCache('commercials');
+        const cachedVendors = await getCache('vendors');
+
+        const cachedEverestMeta = await getCache('everest_metadata');
+        const cachedBookingsMeta = await getCache('bookings_metadata');
+        const cachedCommercialsMeta = await getCache('commercials_metadata');
+        const cachedVendorsMeta = await getCache('vendors_metadata');
+
+        if (cachedEverest && cachedBookings && cachedCommercials && cachedVendors) {
+          setTransactionsRaw(cachedEverest);
+          setBookingsRaw(cachedBookings);
+          setCommercialsRaw(cachedCommercials);
+          setVendorsRaw(cachedVendors);
+
+          const { setDatasetsMetadata } = useStore.getState();
+          if (cachedEverestMeta) setDatasetsMetadata('everest', cachedEverestMeta);
+          if (cachedBookingsMeta) setDatasetsMetadata('bookings', cachedBookingsMeta);
+          if (cachedCommercialsMeta) setDatasetsMetadata('commercials', cachedCommercialsMeta);
+          if (cachedVendorsMeta) setDatasetsMetadata('vendors', cachedVendorsMeta);
+
+          // Trigger processing of cached data automatically
+          processData();
+        }
+      } catch (err) {
+        console.error("Failed to load cached datasets from IndexedDB:", err);
+      }
+    };
+
+    checkCacheAndLoad();
+  }, []);
+
+  const getGoogleAccessToken = async () => {
+    const privateKey = await importPKCS8(credentials.private_key, 'RS256');
+    
+    const jwt = await new SignJWT({
+      iss: credentials.client_email,
+      scope: 'https://www.googleapis.com/auth/spreadsheets.readonly',
+      aud: 'https://oauth2.googleapis.com/token',
+    })
+      .setProtectedHeader({ alg: 'RS256', typ: 'JWT' })
+      .setIssuedAt()
+      .setExpirationTime('1h')
+      .sign(privateKey);
+
+    const res = await fetch('https://oauth2.googleapis.com/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+        assertion: jwt,
+      }),
+    });
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error('Failed to get Google access token: ' + errorText);
+    }
+
+    const data = await res.json();
+    return data.access_token;
+  };
+
+  const fetchGoogleSheetData = async (url: string, accessToken: string) => {
+    const sheetIdMatch = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
+    const gidMatch = url.match(/gid=([0-9]+)/);
+    
+    if (!sheetIdMatch) throw new Error("Invalid Google Sheets URL: missing spreadsheet ID");
+    const sheetId = sheetIdMatch[1];
+    const gid = gidMatch ? parseInt(gidMatch[1], 10) : 0;
+
+    // 1. Fetch metadata to get the sheet name from gid
+    const metaRes = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+    if (!metaRes.ok) {
+      const errText = await metaRes.text();
+      let err;
+      try { err = JSON.parse(errText); } catch { err = { error: { message: errText } }; }
+      throw new Error(err.error?.message || "Failed to fetch spreadsheet metadata");
+    }
+    
+    const metaText = await metaRes.text();
+    let meta;
+    try {
+      meta = JSON.parse(metaText);
+    } catch (e) {
+      throw new Error("Failed to parse metadata JSON: " + metaText.slice(0, 100));
+    }
+    const sheet = meta.sheets.find((s: any) => s.properties.sheetId === gid);
+    if (!sheet) throw new Error(`Sheet with gid ${gid} not found`);
+    const sheetName = sheet.properties.title;
+
+    // 2. Fetch the detailed grid data for the sheet, heavily restricting fields to avoid massive payloads
+    const fields = 'sheets(data(rowData(values(effectiveValue,formattedValue,effectiveFormat/numberFormat,dataValidation))))';
+    const detailedRes = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}?ranges=${encodeURIComponent(sheetName)}&fields=${encodeURIComponent(fields)}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+    
+    if (!detailedRes.ok) {
+      const errText = await detailedRes.text();
+      let err;
+      try { err = JSON.parse(errText); } catch { err = { error: { message: errText } }; }
+      throw new Error(err.error?.message || "Failed to fetch spreadsheet detailed data");
+    }
+    
+    const detailedText = await detailedRes.text();
+    let detailedData;
+    try {
+      detailedData = JSON.parse(detailedText);
+    } catch (e) {
+      throw new Error("Failed to parse detailed data JSON. Payload might be too large. Snippet: " + detailedText.slice(-100));
+    }
+    const sheetData = detailedData.sheets?.[0]?.data?.[0]?.rowData;
+    
+    if (!sheetData || sheetData.length < 2) {
+      return { data: [], metadata: { columns: [] } };
+    }
+
+    const headersRow = sheetData[0].values || [];
+    const headers = headersRow.map((cell: any) => cell?.formattedValue || cell?.effectiveValue?.stringValue || "");
+    
+    // Extract metadata
+    const metadata: any = { columns: [] };
+    headers.forEach((header: string, i: number) => {
+      if (!header) return;
+      let type = "unknown";
+      let options = null;
+      
+      for (let r = 1; r < sheetData.length; r++) {
+        const cell = sheetData[r].values?.[i];
+        if (cell) {
+          if (!options && cell.dataValidation?.condition?.type === 'ONE_OF_LIST') {
+            options = cell.dataValidation.condition.values.map((v: any) => v.userEnteredValue);
+          }
+          
+          if (type === "unknown" && cell.effectiveValue) {
+            if (cell.effectiveValue.numberValue !== undefined) {
+              const formatType = cell.effectiveFormat?.numberFormat?.type;
+              const isDate = formatType === 'DATE' || formatType === 'DATE_TIME' || formatType === 'TIME';
+              type = isDate ? 'date' : 'number';
+            } else if (cell.effectiveValue.boolValue !== undefined) {
+              type = 'boolean';
+            } else if (cell.effectiveValue.stringValue !== undefined) {
+              type = 'string';
+            }
+          }
+        }
+      }
+      
+      metadata.columns.push({
+        name: header,
+        type,
+        options
+      });
+    });
+
+    const rowsData = sheetData.slice(1).map((row: any) => {
+      const obj: Record<string, any> = {};
+      const cells = row.values || [];
+      headers.forEach((header: string, i: number) => {
+        if (!header) return;
+        const cell = cells[i];
+        let val = null;
+        if (cell) {
+          const formatType = cell.effectiveFormat?.numberFormat?.type;
+          const isDate = formatType === 'DATE' || formatType === 'DATE_TIME' || formatType === 'TIME';
+          
+          if (isDate && cell.formattedValue) {
+            val = cell.formattedValue;
+          } else if (cell.effectiveValue?.numberValue !== undefined) {
+            val = cell.effectiveValue.numberValue;
+          } else if (cell.effectiveValue?.boolValue !== undefined) {
+            val = cell.effectiveValue.boolValue;
+          } else if (cell.effectiveValue?.stringValue !== undefined) {
+            val = cell.effectiveValue.stringValue;
+          } else if (cell.formattedValue !== undefined) {
+            val = cell.formattedValue;
+          }
+        }
+        obj[header] = val;
+      });
+      return obj;
+    });
+
+    return { data: rowsData, metadata };
+  };
+
+  const handleFetchData = async () => {
+    setError(null);
+    setLoading(true);
+    try {
+      const everestUrl = import.meta.env.VITE_EVEREST_LINK;
+      const bookingUrl = import.meta.env.VITE_BOOKING_LINK;
+      const commercialUrl = import.meta.env.VITE_COMMERCIAL_LINK;
+      const vendorUrl = import.meta.env.VITE_VENDOR_MAPPING_LINK;
+
+      if (!everestUrl || !bookingUrl || !commercialUrl || !vendorUrl) {
+        throw new Error("One or more Google Sheets links are not defined in .env");
+      }
+
+      // Generate OAuth Token from service account
+      const accessToken = await getGoogleAccessToken();
+
+      const { setDatasetsMetadata } = useStore.getState();
+
+      // Fetch all simultaneously
+      const [everestRes, bookingRes, commercialRes, vendorRes] = await Promise.all([
+        fetchGoogleSheetData(everestUrl, accessToken),
+        fetchGoogleSheetData(bookingUrl, accessToken),
+        fetchGoogleSheetData(commercialUrl, accessToken),
+        fetchGoogleSheetData(vendorUrl, accessToken)
+      ]);
+
+      setTransactionsRaw(everestRes.data);
+      setDatasetsMetadata('everest', everestRes.metadata);
+
+      setBookingsRaw(bookingRes.data);
+      setDatasetsMetadata('bookings', bookingRes.metadata);
+
+      setCommercialsRaw(commercialRes.data);
+      setDatasetsMetadata('commercials', commercialRes.metadata);
+
+      setVendorsRaw(vendorRes.data);
+      setDatasetsMetadata('vendors', vendorRes.metadata);
+
+      // Save to IndexedDB Cache
+      try {
+        await Promise.all([
+          saveCache('everest', everestRes.data),
+          saveCache('bookings', bookingRes.data),
+          saveCache('commercials', commercialRes.data),
+          saveCache('vendors', vendorRes.data),
+          saveCache('everest_metadata', everestRes.metadata),
+          saveCache('bookings_metadata', bookingRes.metadata),
+          saveCache('commercials_metadata', commercialRes.metadata),
+          saveCache('vendors_metadata', vendorRes.metadata)
+        ]);
+      } catch (cacheErr) {
+        console.error("Failed to save fetched datasets to IndexedDB cache:", cacheErr);
+      }
+      
+    } catch (e: any) {
+      console.error(e);
+      setError(e.message || "Failed to fetch data from Google Sheets");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const hasTx = transactionsRaw.length > 0;
+  const hasBk = bookingsRaw.length > 0;
+  const hasCm = commercialsRaw.length > 0;
+  const hasVn = vendorsRaw.length > 0;
+  const canProcess = hasTx && hasBk && hasCm && hasVn;
+
+  return (
+    <div className="flex-1 flex flex-col items-center justify-center max-w-3xl mx-auto w-full gap-8">
+      <div className="text-center space-y-4">
+        <h2 className="text-3xl font-bold text-primary-text">Fetch Datasets</h2>
+        <p className="text-secondary-text max-w-lg mx-auto">
+          The system will automatically fetch transaction and booking data directly from the configured Google Sheets.
+        </p>
+      </div>
+
+      <div className="w-full flex flex-col items-center justify-center space-y-4">
+        <button
+          onClick={handleFetchData}
+          disabled={loading}
+          className={`w-full max-w-md py-4 rounded-xl flex items-center justify-center gap-3 text-lg font-medium transition-all ${
+            loading 
+              ? 'bg-surface-elevated text-muted-text cursor-not-allowed'
+              : 'bg-primary-accent hover:bg-primary-accent/90 text-white shadow-lg shadow-primary-accent/25'
+          }`}
+        >
+          {loading ? (
+            <>
+              <Loader2 className="animate-spin" size={24} />
+              Fetching Data...
+            </>
+          ) : (
+            <>
+              <Database size={24} />
+              Fetch from Google Sheets
+            </>
+          )}
+        </button>
+
+        {error && (
+          <div className="w-full max-w-md p-4 bg-error/10 border border-error/20 rounded-lg text-error text-sm text-center">
+            {error}
+          </div>
+        )}
+      </div>
+
+      {(hasTx || hasBk) && (
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="w-full bg-surface border border-border rounded-xl p-6"
+        >
+          <h3 className="text-lg font-semibold text-primary-text mb-4">Data Status</h3>
+          <div className="space-y-4 mb-6">
+            <div className="flex items-center justify-between p-4 bg-background rounded-lg border border-border/50">
+              <div className="flex items-center gap-3">
+                <Database className={hasTx ? "text-success" : "text-muted-text"} />
+                <div>
+                  <p className="font-medium text-primary-text">Transactions Dataset (Everest)</p>
+                  <p className="text-xs text-muted-text">{hasTx ? `${transactionsRaw.length} rows loaded` : 'Waiting to fetch...'}</p>
+                </div>
+              </div>
+              {hasTx ? <CheckCircle2 className="text-success" size={20} /> : <AlertTriangle className="text-warning" size={20} />}
+            </div>
+            
+            <div className="flex items-center justify-between p-4 bg-background rounded-lg border border-border/50">
+              <div className="flex items-center gap-3">
+                <Database className={hasBk ? "text-secondary-accent" : "text-muted-text"} />
+                <div>
+                  <p className="font-medium text-primary-text">Bookings Dataset</p>
+                  <p className="text-xs text-muted-text">{hasBk ? `${bookingsRaw.length} rows loaded` : 'Waiting to fetch...'}</p>
+                </div>
+              </div>
+              {hasBk ? <CheckCircle2 className="text-success" size={20} /> : <AlertTriangle className="text-warning" size={20} />}
+            </div>
+
+            <div className="flex items-center justify-between p-4 bg-background rounded-lg border border-border/50">
+              <div className="flex items-center gap-3">
+                <Database className={hasCm ? "text-primary-accent" : "text-muted-text"} />
+                <div>
+                  <p className="font-medium text-primary-text">Commercials Dataset</p>
+                  <p className="text-xs text-muted-text">{hasCm ? `${commercialsRaw.length} rows loaded` : 'Waiting to fetch...'}</p>
+                </div>
+              </div>
+              {hasCm ? <CheckCircle2 className="text-success" size={20} /> : <AlertTriangle className="text-warning" size={20} />}
+            </div>
+
+            <div className="flex items-center justify-between p-4 bg-background rounded-lg border border-border/50">
+              <div className="flex items-center gap-3">
+                <Database className={hasVn ? "text-warning" : "text-muted-text"} />
+                <div>
+                  <p className="font-medium text-primary-text">Vendor Mapping Dataset</p>
+                  <p className="text-xs text-muted-text">{hasVn ? `${vendorsRaw.length} rows loaded` : 'Waiting to fetch...'}</p>
+                </div>
+              </div>
+              {hasVn ? <CheckCircle2 className="text-success" size={20} /> : <AlertTriangle className="text-warning" size={20} />}
+            </div>
+          </div>
+
+          <button
+            onClick={processData}
+            disabled={!canProcess}
+            className={`w-full py-3 rounded-lg font-medium transition-all ${
+              canProcess 
+                ? 'bg-primary-accent hover:bg-primary-accent/90 text-white shadow-lg shadow-primary-accent/25' 
+                : 'bg-surface-elevated text-muted-text cursor-not-allowed'
+            }`}
+          >
+            Process & Match Data
+          </button>
+        </motion.div>
+      )}
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/Workspace.tsx">
+import React from 'react';
+import { QuerySidebar } from './QuerySidebar';
+import { ResultsArea } from './ResultsArea';
+
+export function Workspace() {
+  return (
+    <div className="flex-1 flex gap-6 overflow-hidden min-h-[500px]">
+      <QuerySidebar />
+      <div className="flex-1 bg-surface border border-border rounded-xl flex flex-col overflow-hidden">
+        <ResultsArea />
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/dataProcessor.worker.ts">
+self.onmessage = (e: MessageEvent) => {
+  const { transactionsRaw, bookingsRaw, commercialsRaw } = e.data;
+
+  const normalizeId = (id: string): string => {
+    if (!id) return '';
+    return String(id).trim().toUpperCase().replace(/[\u200B-\u200D\uFEFF]/g, '').replace(/[\t\r\n]/g, '').replace(/\s+/g, ' ');
+  };
+
+  const parseNum = (val: any) => {
+    if (val == null || val === '') return 0;
+    if (typeof val === 'number') return val;
+    const num = Number(String(val).replace(/[^0-9.-]+/g, ""));
+    return isNaN(num) ? 0 : num;
+  };
+
+  // Create bookings map
+  const bookingsMap = new Map<string, any>();
+  for (const b of bookingsRaw) {
+    if (b['TXN ID']) {
+      bookingsMap.set(normalizeId(b['TXN ID']), b);
+    }
+  }
+
+  // Create commercials map
+  const commercialsMap = new Map<string, any>();
+  for (const row of commercialsRaw) {
+    const partner = String(row['Banking Partner'] || '').trim().toLowerCase();
+    const transType = String(row['Type of Transaction'] || '').replace(/\s+/g, '').toUpperCase();
+    commercialsMap.set(`${partner}|||${transType}`, row);
+  }
+
+  const processed = transactionsRaw.map((t: any) => {
+    const rawTxnId = t['Txn Id'] || '';
+    const normId = normalizeId(rawTxnId);
+    
+    const txnDate = t['Txn Date'] || t['Date'] || t['txn date'] || t['Transaction Date'] || null;
+
+    const b = bookingsMap.get(normId);
+    const isMatched = !!b;
+
+    const exchangeRate = t['Exchange Rate'] != null ? Number(t['Exchange Rate']) : null;
+    const amountPaidINR = t['Amount paid (INR)'] != null ? Number(t['Amount paid (INR)']) : null;
+    const foreignCurrencyAmountReceived = t['Foreign Currency Amount Received'] != null ? Number(t['Foreign Currency Amount Received']) : null;
+
+    let facilitator: string | null = null;
+    let bookingRate: number | null = null;
+    let totalMarkup: number | null = null;
+    let totalFxMarkup: number | null = null;
+
+    if (isMatched) {
+      facilitator = b['Facilitator'] || null;
+      if (facilitator && (facilitator.trim() === 'RemitX' || facilitator.trim() === 'remitx')) {
+        facilitator = 'Remit X';
+        b['Facilitator'] = 'Remit X';
+      }
+      bookingRate = b['Book Rate'] != null ? Number(b['Book Rate']) : null;
+
+      if (exchangeRate !== null && bookingRate !== null) {
+        totalMarkup = exchangeRate - bookingRate;
+        if (foreignCurrencyAmountReceived !== null) {
+          totalFxMarkup = totalMarkup * foreignCurrencyAmountReceived;
+        }
+      }
+    } else {
+      facilitator = "Not Found";
+    }
+
+    // Calculate Total Non-Fx Fees
+    const hopFees = t['Hop Fees'];
+    const bankProcessingFees = t['Bank Processing Fees'];
+    const nostroCharges = t['Nostro Charges'];
+    const promoCodeApplied = t['Promo Code Applied'];
+    let hopCoinsUsed = t['Hop Coins Used'];
+    if (typeof hopCoinsUsed === 'string' && hopCoinsUsed.trim().toUpperCase() === 'N/A') {
+      hopCoinsUsed = 0;
+      t['Hop Coins Used'] = 0;
+    }
+
+    let totalNonFxFees: number | null = null;
+
+    // If at least one fee component is present, calculate.
+    if (hopFees != null || bankProcessingFees != null || nostroCharges != null) {
+      const hf = parseNum(hopFees);
+      const bpf = parseNum(bankProcessingFees);
+      const nc = parseNum(nostroCharges);
+      const pca = parseNum(promoCodeApplied);
+      const hcu = parseNum(hopCoinsUsed);
+
+      const sumFees = hf + bpf + nc;
+      const discount = pca + (hcu / 2);
+      totalNonFxFees = (sumFees - discount) / 1.18;
+    }
+
+    // 1. BankFx rate & transaction type mapping
+    const purpose = t['Purpose'] || null;
+    let typeOfTransaction: string | null = null;
+    if (purpose) {
+      const p = purpose.trim().toLowerCase();
+      if (p === 'overseas education - living expenses' || p === 'overseas education - university fees') {
+        typeOfTransaction = 'AD 2';
+      } else if (p === 'personal gift or donation' || p === 'family maintenance') {
+        typeOfTransaction = 'AD 1';
+      }
+    }
+
+    let bankFxRate: number | null = null;
+    let bankNonFxCharges: number | null = null;
+    let bankFxMargin: number | null = null;
+
+    if (isMatched && facilitator && typeOfTransaction) {
+      const normFac = facilitator.trim().toLowerCase();
+      const normType = typeOfTransaction.replace(/\s+/g, '').toUpperCase();
+
+      const commRow = commercialsMap.get(`${normFac}|||${normType}`);
+
+      if (commRow) {
+        const fxMarginVal = commRow['Fx Margin '] || commRow['Fx Margin'];
+        bankFxRate = parseNum(fxMarginVal);
+
+        const isUSD = String(t['Currency'] || '').trim().toUpperCase() === 'USD';
+        const nonFxVal = commRow[isUSD ? 'Non FX (USD)' : 'Non FX (Others)'];
+        bankNonFxCharges = parseNum(nonFxVal);
+
+        if (bankFxRate !== null && foreignCurrencyAmountReceived !== null) {
+          bankFxMargin = bankFxRate * foreignCurrencyAmountReceived;
+        }
+      }
+    }
+    const revenue = (totalFxMarkup !== null || totalNonFxFees !== null || bankFxMargin !== null)
+      ? (totalFxMarkup || 0) + (totalNonFxFees || 0) + (bankFxMargin || 0)
+      : null;
+
+    const cogs = (bankFxMargin !== null || bankNonFxCharges !== null)
+      ? (bankFxMargin || 0) + (bankNonFxCharges || 0)
+      : null;
+
+    const netProfit = (revenue !== null && cogs !== null)
+      ? revenue - cogs
+      : null;
+
+    const baseObj = {
+      id: normId,
+      txnId: rawTxnId,
+      txnDate,
+      exchangeRate,
+      amountPaidINR,
+      foreignCurrencyAmountReceived,
+      facilitator,
+      bookingRate,
+      totalMarkup,
+      totalFxMarkup,
+      totalNonFxFees,
+      typeOfTransaction,
+      bankFxRate,
+      bankNonFxCharges,
+      bankFxMargin,
+      revenue,
+      cogs,
+      netProfit,
+      isMatched,
+      raw: { ...t, ...b }
+    };
+
+    const getNormalizedKey = (k: string): string => {
+      return k.toLowerCase().replace(/[^a-z0-9]/g, '');
+    };
+
+    const mergeRow = (ev: boolean, bk: boolean) => {
+      const merged = { ...baseObj };
+      const existingNormalized = new Set<string>();
+      for (const k of Object.keys(merged)) {
+        existingNormalized.add(getNormalizedKey(k));
+      }
+
+      if (ev && t) {
+        for (const [k, val] of Object.entries(t)) {
+          const normK = getNormalizedKey(k);
+          if (!existingNormalized.has(normK)) {
+            (merged as any)[k] = val;
+            existingNormalized.add(normK);
+          }
+        }
+      }
+
+      if (bk && b) {
+        for (const [k, val] of Object.entries(b)) {
+          const normK = getNormalizedKey(k);
+          if (!existingNormalized.has(normK)) {
+            (merged as any)[k] = val;
+            existingNormalized.add(normK);
+          }
+        }
+      }
+
+      delete (merged as any).everestRaw;
+      delete (merged as any).bookingsRaw;
+      return merged;
+    };
+
+    const merged_matched_T_T = mergeRow(true, true);
+    const merged_matched_T_F = mergeRow(true, false);
+    const merged_matched_F_T = mergeRow(false, true);
+    const merged_matched_F_F = mergeRow(false, false);
+
+    const merged_all_T = mergeRow(true, false);
+    const merged_all_F = mergeRow(false, false);
+
+    return {
+      ...baseObj,
+      everestRaw: t,
+      bookingsRaw: b,
+      merged_matched_T_T,
+      merged_matched_T_F,
+      merged_matched_F_T,
+      merged_matched_F_F,
+      merged_all_T,
+      merged_all_F
+    };
+  });
+
+  self.postMessage({ processed });
+};
+</file>
+
+<file path="src/index.css">
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0B1020;
+  --color-secondary-background: #111827;
+  --color-surface: #161F33;
+  --color-surface-elevated: #1D2942;
+  --color-border: #26334D;
+  
+  --color-primary-text: #F8FAFC;
+  --color-secondary-text: #94A3B8;
+  --color-muted-text: #64748B;
+  
+  --color-primary-accent: #3B82F6;
+  --color-secondary-accent: #06B6D4;
+  
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-highlight: #8B5CF6;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-primary-text);
+  }
+
+  /* Custom Scrollbar Styles */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-background);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 9999px;
+    border: 2px solid var(--color-background);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-muted-text);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) var(--color-background);
+  }
+}
+</file>
+
+<file path="src/lib/db.ts">
+const DB_NAME = 'RemittanceAnalyticsDB';
+const STORE_NAME = 'SheetsCache';
+const DB_VERSION = 1;
+
+function getDB(): Promise<IDBDatabase> {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, DB_VERSION);
+    request.onerror = () => reject(request.error);
+    request.onsuccess = () => resolve(request.result);
+    request.onupgradeneeded = () => {
+      const db = request.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME);
+      }
+    };
+  });
+}
+
+export async function saveCache(key: string, data: any): Promise<void> {
+  try {
+    const db = await getDB();
+    return new Promise<void>((resolve, reject) => {
+      const transaction = db.transaction(STORE_NAME, 'readwrite');
+      const store = transaction.objectStore(STORE_NAME);
+      const request = store.put(data, key);
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => resolve();
+    });
+  } catch (err) {
+    console.error("IndexedDB saveCache error:", err);
+  }
+}
+
+export async function getCache(key: string): Promise<any | null> {
+  try {
+    const db = await getDB();
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(STORE_NAME, 'readonly');
+      const store = transaction.objectStore(STORE_NAME);
+      const request = store.get(key);
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => resolve(request.result !== undefined ? request.result : null);
+    });
+  } catch (err) {
+    console.error("IndexedDB getCache error:", err);
+    return null;
+  }
+}
+
+export async function clearCache(): Promise<void> {
+  try {
+    const db = await getDB();
+    return new Promise<void>((resolve, reject) => {
+      const transaction = db.transaction(STORE_NAME, 'readwrite');
+      const store = transaction.objectStore(STORE_NAME);
+      const request = store.clear();
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => resolve();
+    });
+  } catch (err) {
+    console.error("IndexedDB clearCache error:", err);
+  }
+}
+</file>
+
+<file path="src/lib/gemini.ts">
+import { GoogleGenAI } from '@google/genai';
+
+const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
+
+export async function parseQueryWithGeminiAll(query: string, schemas: Record<string, any>) {
+  const prompt = `
+You are a data analysis AI. Convert the user's question into structured JSON query plans for multiple datasets.
+The user question may apply to different datasets (matched, unmatched, all, everest, bookings, commercials, vendors) which represent different sheets/tabs in our application.
+Please output a query plan for EACH dataset. If the query does not apply to a dataset or cannot be answered using its columns, output null for that dataset.
+
+Available schemas for each dataset:
+${JSON.stringify(schemas, null, 2)}
+
+User Question: "${query}"
+
+Return ONLY valid JSON matching this structure:
+{
+  "matched": { "operations": [ ... ] } or null,
+  "unmatched": { "operations": [ ... ] } or null,
+  "all": { "operations": [ ... ] } or null,
+  "everest": { "operations": [ ... ] } or null,
+  "bookings": { "operations": [ ... ] } or null,
+  "commercials": { "operations": [ ... ] } or null,
+  "vendors": { "operations": [ ... ] } or null
+}
+
+For each plan, operations is an array of objects matching:
+{
+  "type": "filter|sort|group_by|aggregate|limit",
+  "field": "column_name",
+  "operator": "eq|neq|gt|gte|lt|lte|contains|in|is_null|is_not_null",
+  "value": "value to filter by",
+  "direction": "asc|desc",
+  "groupByFields": ["col1"],
+  "aggregations": [{"field": "col1", "function": "sum|avg|count|min|max", "alias": "result_name"}],
+  "limit": 10
+}
+
+DO NOT include markdown formatting or backticks in the response. Return raw JSON.
+`;
+
+  try {
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: prompt,
+      config: {
+        temperature: 0,
+        responseMimeType: "application/json"
+      }
+    });
+    
+    if (!response.text) throw new Error("Empty response from Gemini");
+    
+    const jsonStr = response.text.replace(/```json\n?|\n?```/g, '').trim();
+    return JSON.parse(jsonStr);
+  } catch (err: any) {
+    console.error("Gemini Parsing Error:", err);
+    throw new Error("Failed to parse query into operations");
+  }
+}
+</file>
+
+<file path="src/lib/queryEngine.ts">
+import { z } from 'zod';
+
+export const QuerySchema = z.object({
+  operations: z.array(z.object({
+    type: z.enum(['filter', 'sort', 'group_by', 'aggregate', 'limit']),
+    
+    // For filter
+    field: z.string().optional(),
+    operator: z.enum(['eq', 'neq', 'gt', 'gte', 'lt', 'lte', 'contains', 'in', 'is_null', 'is_not_null']).optional(),
+    value: z.any().optional(),
+    
+    // For sort
+    direction: z.enum(['asc', 'desc']).optional(),
+    
+    // For group_by
+    groupByFields: z.array(z.string()).optional(),
+    
+    // For aggregate
+    aggregations: z.array(z.object({
+      field: z.string(),
+      function: z.enum(['sum', 'avg', 'count', 'min', 'max']),
+      alias: z.string()
+    })).optional(),
+    
+    // For limit
+    limit: z.number().optional()
+  }))
+});
+
+export type QueryPlan = z.infer<typeof QuerySchema>;
+
+export function executeQuery(data: any[], plan: QueryPlan): any[] {
+  let result = [...data];
+
+  for (const op of plan.operations) {
+    switch (op.type) {
+      case 'filter':
+        if (!op.field || !op.operator) continue;
+        result = result.filter(row => {
+          const val = row[op.field!];
+          // Null check handling
+          if (op.operator === 'is_null') return val === null || val === undefined;
+          if (op.operator === 'is_not_null') return val !== null && val !== undefined;
+          
+          if (val === null || val === undefined) return false;
+          
+          switch (op.operator) {
+            case 'eq': return val === op.value;
+            case 'neq': return val !== op.value;
+            case 'gt': return Number(val) > Number(op.value);
+            case 'gte': return Number(val) >= Number(op.value);
+            case 'lt': return Number(val) < Number(op.value);
+            case 'lte': return Number(val) <= Number(op.value);
+            case 'contains': return String(val).toLowerCase().includes(String(op.value).toLowerCase());
+            case 'in': return Array.isArray(op.value) && op.value.includes(val);
+            default: return true;
+          }
+        });
+        break;
+
+      case 'sort':
+        if (!op.field) continue;
+        const dir = op.direction === 'desc' ? -1 : 1;
+        result.sort((a, b) => {
+          const valA = a[op.field!];
+          const valB = b[op.field!];
+          if (valA === null && valB === null) return 0;
+          if (valA === null) return 1; // nulls last
+          if (valB === null) return -1;
+          return valA > valB ? dir : valA < valB ? -dir : 0;
+        });
+        break;
+
+      case 'group_by':
+        if (!op.groupByFields || op.groupByFields.length === 0) continue;
+        const groups = new Map<string, any[]>();
+        for (const row of result) {
+          const key = op.groupByFields.map(f => row[f]).join('|||');
+          if (!groups.has(key)) groups.set(key, []);
+          groups.get(key)!.push(row);
+        }
+        result = Array.from(groups.entries()).map(([key, rows]) => {
+          const groupRow: any = {};
+          op.groupByFields!.forEach((f, i) => {
+            groupRow[f] = key.split('|||')[i];
+          });
+          groupRow._rows = rows;
+          return groupRow;
+        });
+        break;
+
+      case 'aggregate':
+        if (!op.aggregations) continue;
+        if (result.length > 0 && result[0]._rows) {
+          // It's grouped
+          result = result.map(group => {
+            const out = { ...group };
+            delete out._rows;
+            for (const agg of op.aggregations!) {
+              const rows = group._rows as any[];
+              const vals = rows.map(r => r[agg.field]).filter(v => v !== null && v !== undefined);
+              if (agg.function === 'count') {
+                out[agg.alias] = vals.length;
+              } else if (agg.function === 'sum') {
+                out[agg.alias] = vals.reduce((sum, v) => sum + Number(v), 0);
+              } else if (agg.function === 'avg') {
+                out[agg.alias] = vals.length ? vals.reduce((sum, v) => sum + Number(v), 0) / vals.length : null;
+              } else if (agg.function === 'max') {
+                out[agg.alias] = vals.length ? Math.max(...vals.map(Number)) : null;
+              } else if (agg.function === 'min') {
+                out[agg.alias] = vals.length ? Math.min(...vals.map(Number)) : null;
+              }
+            }
+            return out;
+          });
+        } else {
+          // Aggregate entire dataset
+          const out: any = {};
+          for (const agg of op.aggregations!) {
+            const vals = result.map(r => r[agg.field]).filter(v => v !== null && v !== undefined);
+            if (agg.function === 'count') {
+              out[agg.alias] = vals.length;
+            } else if (agg.function === 'sum') {
+              out[agg.alias] = vals.reduce((sum, v) => sum + Number(v), 0);
+            } else if (agg.function === 'avg') {
+              out[agg.alias] = vals.length ? vals.reduce((sum, v) => sum + Number(v), 0) / vals.length : null;
+            } else if (agg.function === 'max') {
+              out[agg.alias] = vals.length ? Math.max(...vals.map(Number)) : null;
+            } else if (agg.function === 'min') {
+              out[agg.alias] = vals.length ? Math.min(...vals.map(Number)) : null;
+            }
+          }
+          result = [out];
+        }
+        break;
+
+      case 'limit':
+        if (op.limit !== undefined) {
+          result = result.slice(0, op.limit);
+        }
+        break;
+    }
+  }
+
+  return result;
+}
+</file>
+
+<file path="src/main.tsx">
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.tsx'
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+</file>
+
+<file path="src/store.ts">
+import { create } from 'zustand';
+// @ts-ignore
+import ProcessorWorker from './dataProcessor.worker?worker';
+
+export interface ProcessedTransaction {
+  id: string;
+  txnId: string;
+  txnDate: string | null;
+  exchangeRate: number | null;
+  amountPaidINR: number | null;
+  foreignCurrencyAmountReceived: number | null;
+
+  facilitator: string | null;
+  bookingRate: number | null;
+
+  totalMarkup: number | null;
+  totalFxMarkup: number | null;
+  totalNonFxFees: number | null;
+
+  typeOfTransaction: string | null;
+  bankFxRate: number | null;
+  bankNonFxCharges: number | null;
+  bankFxMargin: number | null;
+  revenue: number | null;
+  cogs: number | null;
+  netProfit: number | null;
+
+  everestRaw?: any;
+  bookingsRaw?: any;
+
+  isMatched: boolean;
+  raw: any;
+
+  merged_matched_T_T?: any;
+  merged_matched_T_F?: any;
+  merged_matched_F_T?: any;
+  merged_matched_F_F?: any;
+
+  merged_all_T?: any;
+  merged_all_F?: any;
+}
+
+export type DatasetType = 'matched' | 'unmatched' | 'all' | 'everest' | 'bookings' | 'commercials' | 'vendors';
+
+export interface TabState {
+  id: string;
+  name: string;
+  currentDataset: DatasetType;
+  currentPlan: Record<string, any> | null;
+  currentQueryText: string | null;
+  queryResult: any[] | null;
+  filters: Record<string, any>;
+  sortConfig: { key: string; direction: 'asc' | 'desc' } | null;
+  includeEverestMatched: boolean;
+  includeBookingsMatched: boolean;
+  unmatchedView: 'everest' | 'bookings';
+  allShowEverest: boolean;
+}
+
+interface AppState {
+  transactionsRaw: any[];
+  bookingsRaw: any[];
+  commercialsRaw: any[];
+  vendorsRaw: any[];
+  datasetsMetadata: Record<string, any>;
+  processedData: ProcessedTransaction[];
+  queryHistory: { query: string; plan: any }[];
+
+  setTransactionsRaw: (data: any[]) => void;
+  setBookingsRaw: (data: any[]) => void;
+  setCommercialsRaw: (data: any[]) => void;
+  setVendorsRaw: (data: any[]) => void;
+  setDatasetsMetadata: (key: string, metadata: any) => void;
+  processData: () => void;
+  clearSession: () => void;
+
+  currentDataset: DatasetType;
+  setCurrentDataset: (type: DatasetType) => void;
+
+  currentPlan: Record<string, any> | null;
+  setCurrentPlan: (plan: Record<string, any> | null, text?: string | null) => void;
+  currentQueryText: string | null;
+
+  queryResult: any[] | null;
+  setQueryResult: (res: any[] | null) => void;
+  addQueryToHistory: (query: string, plan: any) => void;
+
+  filters: Record<string, any>;
+  setFilters: (filters: Record<string, any>) => void;
+  sortConfig: { key: string; direction: 'asc' | 'desc' } | null;
+  setSortConfig: (sortConfig: { key: string; direction: 'asc' | 'desc' } | null) => void;
+
+  includeEverestMatched: boolean;
+  setIncludeEverestMatched: (val: boolean) => void;
+  includeBookingsMatched: boolean;
+  setIncludeBookingsMatched: (val: boolean) => void;
+  unmatchedView: 'everest' | 'bookings';
+  setUnmatchedView: (val: 'everest' | 'bookings') => void;
+  allShowEverest: boolean;
+  setAllShowEverest: (val: boolean) => void;
+
+  tabs: TabState[];
+  activeTabId: string;
+  addTab: () => void;
+  closeTab: (id: string) => void;
+  setActiveTabId: (id: string) => void;
+
+  isProcessing: boolean;
+}
+
+function normalizeId(id: string): string {
+  if (!id) return '';
+  return String(id).trim().toUpperCase().replace(/[\u200B-\u200D\uFEFF]/g, '').replace(/[\t\r\n]/g, '').replace(/\s+/g, ' ');
+}
+
+export const useStore = create<AppState>((set, get) => ({
+  transactionsRaw: [],
+  bookingsRaw: [],
+  commercialsRaw: [],
+  vendorsRaw: [],
+  datasetsMetadata: {},
+  processedData: [],
+  queryHistory: [],
+  isProcessing: false,
+
+  currentDataset: 'matched',
+  setCurrentDataset: (type) => set((state) => {
+    const updatedTabs = state.tabs.map(t => t.id === state.activeTabId ? { ...t, currentDataset: type, filters: {}, sortConfig: null } : t);
+    return { currentDataset: type, filters: {}, sortConfig: null, tabs: updatedTabs };
+  }),
+
+  currentPlan: null,
+  currentQueryText: null,
+  setCurrentPlan: (plan, text = null) => set((state) => {
+    const updatedTabs = state.tabs.map(t => t.id === state.activeTabId ? { ...t, currentPlan: plan, currentQueryText: text } : t);
+    return { currentPlan: plan, currentQueryText: text, tabs: updatedTabs };
+  }),
+
+  queryResult: null,
+  setQueryResult: (res) => set((state) => {
+    const updatedTabs = state.tabs.map(t => t.id === state.activeTabId ? { ...t, queryResult: res } : t);
+    return { queryResult: res, tabs: updatedTabs };
+  }),
+  addQueryToHistory: (query, plan) => set((state) => ({ queryHistory: [{ query, plan }, ...state.queryHistory] })),
+
+  filters: {},
+  setFilters: (filters) => set((state) => {
+    const updatedTabs = state.tabs.map(t => t.id === state.activeTabId ? { ...t, filters } : t);
+    return { filters, tabs: updatedTabs };
+  }),
+  sortConfig: null,
+  setSortConfig: (sortConfig) => set((state) => {
+    const updatedTabs = state.tabs.map(t => t.id === state.activeTabId ? { ...t, sortConfig } : t);
+    return { sortConfig, tabs: updatedTabs };
+  }),
+
+  includeEverestMatched: false,
+  setIncludeEverestMatched: (val) => set((state) => {
+    const updatedTabs = state.tabs.map(t => t.id === state.activeTabId ? { ...t, includeEverestMatched: val } : t);
+    return { includeEverestMatched: val, tabs: updatedTabs };
+  }),
+  includeBookingsMatched: false,
+  setIncludeBookingsMatched: (val) => set((state) => {
+    const updatedTabs = state.tabs.map(t => t.id === state.activeTabId ? { ...t, includeBookingsMatched: val } : t);
+    return { includeBookingsMatched: val, tabs: updatedTabs };
+  }),
+  unmatchedView: 'everest',
+  setUnmatchedView: (val) => set((state) => {
+    const updatedTabs = state.tabs.map(t => t.id === state.activeTabId ? { ...t, unmatchedView: val } : t);
+    return { unmatchedView: val, tabs: updatedTabs };
+  }),
+  allShowEverest: false,
+  setAllShowEverest: (val) => set((state) => {
+    const updatedTabs = state.tabs.map(t => t.id === state.activeTabId ? { ...t, allShowEverest: val } : t);
+    return { allShowEverest: val, tabs: updatedTabs };
+  }),
+
+  tabs: [
+    {
+      id: 'tab-1',
+      name: 'Tab 1',
+      currentDataset: 'matched',
+      currentPlan: null,
+      currentQueryText: null,
+      queryResult: null,
+      filters: {},
+      sortConfig: null,
+      includeEverestMatched: false,
+      includeBookingsMatched: false,
+      unmatchedView: 'everest',
+      allShowEverest: false,
+    }
+  ],
+  activeTabId: 'tab-1',
+  addTab: () => set((state) => {
+    const updatedTabs = state.tabs.map(t => t.id === state.activeTabId ? {
+      ...t,
+      currentDataset: state.currentDataset,
+      currentPlan: state.currentPlan,
+      currentQueryText: state.currentQueryText,
+      queryResult: state.queryResult,
+      filters: state.filters,
+      sortConfig: state.sortConfig,
+      includeEverestMatched: state.includeEverestMatched,
+      includeBookingsMatched: state.includeBookingsMatched,
+      unmatchedView: state.unmatchedView,
+      allShowEverest: state.allShowEverest,
+    } : t);
+
+    const nextId = `tab-${Date.now()}`;
+    const newTab: TabState = {
+      id: nextId,
+      name: `Tab ${updatedTabs.length + 1}`,
+      currentDataset: 'matched',
+      currentPlan: null,
+      currentQueryText: null,
+      queryResult: null,
+      filters: {},
+      sortConfig: null,
+      includeEverestMatched: false,
+      includeBookingsMatched: false,
+      unmatchedView: 'everest',
+      allShowEverest: false,
+    };
+
+    return {
+      tabs: [...updatedTabs, newTab],
+      activeTabId: nextId,
+      currentDataset: 'matched',
+      currentPlan: null,
+      currentQueryText: null,
+      queryResult: null,
+      filters: {},
+      sortConfig: null,
+      includeEverestMatched: false,
+      includeBookingsMatched: false,
+      unmatchedView: 'everest',
+      allShowEverest: false,
+    };
+  }),
+  closeTab: (id) => set((state) => {
+    if (state.tabs.length === 1) return {};
+    const newTabs = state.tabs.filter(t => t.id !== id);
+    let newActiveId = state.activeTabId;
+    let updates: any = { tabs: newTabs };
+    
+    if (state.activeTabId === id) {
+      const idx = state.tabs.findIndex(t => t.id === id);
+      const nextActive = state.tabs[idx + 1] || state.tabs[idx - 1];
+      newActiveId = nextActive.id;
+      updates = {
+        ...updates,
+        activeTabId: newActiveId,
+        currentDataset: nextActive.currentDataset,
+        currentPlan: nextActive.currentPlan,
+        currentQueryText: nextActive.currentQueryText,
+        queryResult: nextActive.queryResult,
+        filters: nextActive.filters,
+        sortConfig: nextActive.sortConfig,
+        includeEverestMatched: nextActive.includeEverestMatched,
+        includeBookingsMatched: nextActive.includeBookingsMatched,
+        unmatchedView: nextActive.unmatchedView,
+        allShowEverest: nextActive.allShowEverest,
+      };
+    }
+    return updates;
+  }),
+  setActiveTabId: (id) => set((state) => {
+    const updatedTabs = state.tabs.map(t => t.id === state.activeTabId ? {
+      ...t,
+      currentDataset: state.currentDataset,
+      currentPlan: state.currentPlan,
+      currentQueryText: state.currentQueryText,
+      queryResult: state.queryResult,
+      filters: state.filters,
+      sortConfig: state.sortConfig,
+      includeEverestMatched: state.includeEverestMatched,
+      includeBookingsMatched: state.includeBookingsMatched,
+      unmatchedView: state.unmatchedView,
+      allShowEverest: state.allShowEverest,
+    } : t);
+
+    const nextTab = updatedTabs.find(t => t.id === id);
+    if (!nextTab) return {};
+
+    return {
+      tabs: updatedTabs,
+      activeTabId: id,
+      currentDataset: nextTab.currentDataset,
+      currentPlan: nextTab.currentPlan,
+      currentQueryText: nextTab.currentQueryText,
+      queryResult: nextTab.queryResult,
+      filters: nextTab.filters,
+      sortConfig: nextTab.sortConfig,
+      includeEverestMatched: nextTab.includeEverestMatched,
+      includeBookingsMatched: nextTab.includeBookingsMatched,
+      unmatchedView: nextTab.unmatchedView,
+      allShowEverest: nextTab.allShowEverest,
+    };
+  }),
+
+  setTransactionsRaw: (data) => {
+    const cleaned = Array.isArray(data) ? data.map(row => {
+      if (row && typeof row === 'object') {
+        const targetKey = Object.keys(row).find(k => k.trim().toLowerCase() === 'hop coins used') || 'Hop Coins Used';
+        const val = row[targetKey];
+        if (val !== undefined && typeof val === 'string' && val.trim().toUpperCase() === 'N/A') {
+          return { ...row, [targetKey]: 0 };
+        }
+      }
+      return row;
+    }) : [];
+    set({ transactionsRaw: cleaned });
+  },
+  setBookingsRaw: (data) => {
+    const cleaned = Array.isArray(data) ? data.map(row => {
+      if (row && typeof row === 'object') {
+        const targetKey = Object.keys(row).find(k => k.trim().toLowerCase() === 'facilitator') || 'Facilitator';
+        const val = row[targetKey];
+        if (val !== undefined && typeof val === 'string' && (val.trim() === 'RemitX' || val.trim() === 'remitx')) {
+          return { ...row, [targetKey]: 'Remit X' };
+        }
+      }
+      return row;
+    }) : [];
+    set({ bookingsRaw: cleaned });
+  },
+  setCommercialsRaw: (data) => set({ commercialsRaw: data }),
+  setVendorsRaw: (data) => set({ vendorsRaw: data }),
+  setDatasetsMetadata: (key, metadata) => set((state) => ({
+    datasetsMetadata: { ...state.datasetsMetadata, [key]: metadata }
+  })),
+
+  clearSession: () => set({
+    transactionsRaw: [],
+    bookingsRaw: [],
+    commercialsRaw: [],
+    vendorsRaw: [],
+    datasetsMetadata: {},
+    processedData: [],
+    queryHistory: [],
+    currentPlan: null,
+    currentQueryText: null,
+    queryResult: null,
+    currentDataset: 'matched',
+    filters: {},
+    sortConfig: null,
+    includeEverestMatched: false,
+    includeBookingsMatched: false,
+    unmatchedView: 'everest',
+    allShowEverest: false,
+    activeTabId: 'tab-1',
+    tabs: [
+      {
+        id: 'tab-1',
+        name: 'Tab 1',
+        currentDataset: 'matched',
+        currentPlan: null,
+        currentQueryText: null,
+        queryResult: null,
+        filters: {},
+        sortConfig: null,
+        includeEverestMatched: false,
+        includeBookingsMatched: false,
+        unmatchedView: 'everest',
+        allShowEverest: false,
+      }
+    ],
+  }),
+
+  processData: () => {
+    set({ isProcessing: true });
+    const { transactionsRaw, bookingsRaw, commercialsRaw } = get();
+
+    try {
+      const worker = new ProcessorWorker();
+      worker.postMessage({ transactionsRaw, bookingsRaw, commercialsRaw });
+      
+      worker.onmessage = (e) => {
+        const { processed } = e.data;
+        set({ processedData: processed, isProcessing: false });
+        worker.terminate();
+      };
+
+      worker.onerror = (err) => {
+        console.error("Worker error during data processing:", err);
+        set({ isProcessing: false });
+        worker.terminate();
+      };
+    } catch (err) {
+      console.error("Failed to start background worker for data processing. Running synchronously on main thread as fallback.", err);
+      // Synchronous fallback
+      // Create bookings map
+      const bookingsMap = new Map<string, any>();
+      for (const b of bookingsRaw) {
+        if (b['TXN ID']) {
+          bookingsMap.set(normalizeId(b['TXN ID']), b);
+        }
+      }
+
+      // Create commercials map
+      const commercialsMap = new Map<string, any>();
+      for (const row of commercialsRaw) {
+        const partner = String(row['Banking Partner'] || '').trim().toLowerCase();
+        const transType = String(row['Type of Transaction'] || '').replace(/\s+/g, '').toUpperCase();
+        commercialsMap.set(`${partner}|||${transType}`, row);
+      }
+
+      const parseNumFallback = (val: any) => {
+        if (val == null || val === '') return 0;
+        if (typeof val === 'number') return val;
+        const num = Number(String(val).replace(/[^0-9.-]+/g, ""));
+        return isNaN(num) ? 0 : num;
+      };
+
+      const processedFallback: ProcessedTransaction[] = transactionsRaw.map(t => {
+        const rawTxnId = t['Txn Id'] || '';
+        const normId = normalizeId(rawTxnId);
+        const txnDate = t['Txn Date'] || t['Date'] || t['txn date'] || t['Transaction Date'] || null;
+
+        const b = bookingsMap.get(normId);
+        const isMatched = !!b;
+
+        const exchangeRate = t['Exchange Rate'] != null ? Number(t['Exchange Rate']) : null;
+        const amountPaidINR = t['Amount paid (INR)'] != null ? Number(t['Amount paid (INR)']) : null;
+        const foreignCurrencyAmountReceived = t['Foreign Currency Amount Received'] != null ? Number(t['Foreign Currency Amount Received']) : null;
+
+        let facilitator: string | null = null;
+        let bookingRate: number | null = null;
+        let totalMarkup: number | null = null;
+        let totalFxMarkup: number | null = null;
+
+        if (isMatched) {
+          facilitator = b['Facilitator'] || null;
+          if (facilitator && (facilitator.trim() === 'RemitX' || facilitator.trim() === 'remitx')) {
+            facilitator = 'Remit X';
+            b['Facilitator'] = 'Remit X';
+          }
+          bookingRate = b['Book Rate'] != null ? Number(b['Book Rate']) : null;
+
+          if (exchangeRate !== null && bookingRate !== null) {
+            totalMarkup = exchangeRate - bookingRate;
+            if (foreignCurrencyAmountReceived !== null) {
+              totalFxMarkup = totalMarkup * foreignCurrencyAmountReceived;
+            }
+          }
+        } else {
+          facilitator = "Not Found";
+        }
+
+        // Calculate Total Non-Fx Fees
+        const hopFees = t['Hop Fees'];
+        const bankProcessingFees = t['Bank Processing Fees'];
+        const nostroCharges = t['Nostro Charges'];
+        const promoCodeApplied = t['Promo Code Applied'];
+        let hopCoinsUsed = t['Hop Coins Used'];
+        if (typeof hopCoinsUsed === 'string' && hopCoinsUsed.trim().toUpperCase() === 'N/A') {
+          hopCoinsUsed = 0;
+          t['Hop Coins Used'] = 0;
+        }
+
+        let totalNonFxFees: number | null = null;
+
+        if (hopFees != null || bankProcessingFees != null || nostroCharges != null) {
+          const hf = parseNumFallback(hopFees);
+          const bpf = parseNumFallback(bankProcessingFees);
+          const nc = parseNumFallback(nostroCharges);
+          const pca = parseNumFallback(promoCodeApplied);
+          const hcu = parseNumFallback(hopCoinsUsed);
+
+          const sumFees = hf + bpf + nc;
+          const discount = pca + (hcu / 2);
+          totalNonFxFees = (sumFees - discount) / 1.18;
+        }
+
+        // 1. BankFx rate & transaction type mapping
+        const purpose = t['Purpose'] || null;
+        let typeOfTransaction: string | null = null;
+        if (purpose) {
+          const p = purpose.trim().toLowerCase();
+          if (p === 'overseas education - living expenses' || p === 'overseas education - university fees') {
+            typeOfTransaction = 'AD 2';
+          } else if (p === 'personal gift or donation' || p === 'family maintenance') {
+            typeOfTransaction = 'AD 1';
+          }
+        }
+
+        let bankFxRate: number | null = null;
+        let bankNonFxCharges: number | null = null;
+        let bankFxMargin: number | null = null;
+
+        if (isMatched && facilitator && typeOfTransaction) {
+          const normFac = facilitator.trim().toLowerCase();
+          const normType = typeOfTransaction.replace(/\s+/g, '').toUpperCase();
+
+          const commRow = commercialsMap.get(`${normFac}|||${normType}`);
+
+          if (commRow) {
+            const fxMarginVal = commRow['Fx Margin '] || commRow['Fx Margin'];
+            bankFxRate = parseNumFallback(fxMarginVal);
+
+            const isUSD = String(t['Currency'] || '').trim().toUpperCase() === 'USD';
+            const nonFxVal = commRow[isUSD ? 'Non FX (USD)' : 'Non FX (Others)'];
+            bankNonFxCharges = parseNumFallback(nonFxVal);
+
+            if (bankFxRate !== null && foreignCurrencyAmountReceived !== null) {
+              bankFxMargin = bankFxRate * foreignCurrencyAmountReceived;
+            }
+          }
+        }
+        const revenue = (totalFxMarkup !== null || totalNonFxFees !== null || bankFxMargin !== null)
+          ? (totalFxMarkup || 0) + (totalNonFxFees || 0) + (bankFxMargin || 0)
+          : null;
+
+        const cogs = (bankFxMargin !== null || bankNonFxCharges !== null)
+          ? (bankFxMargin || 0) + (bankNonFxCharges || 0)
+          : null;
+
+        const netProfit = (revenue !== null && cogs !== null)
+          ? revenue - cogs
+          : null;
+
+        const baseObj = {
+          id: normId,
+          txnId: rawTxnId,
+          txnDate,
+          exchangeRate,
+          amountPaidINR,
+          foreignCurrencyAmountReceived,
+          facilitator,
+          bookingRate,
+          totalMarkup,
+          totalFxMarkup,
+          totalNonFxFees,
+          typeOfTransaction,
+          bankFxRate,
+          bankNonFxCharges,
+          bankFxMargin,
+          revenue,
+          cogs,
+          netProfit,
+          isMatched,
+          raw: { ...t, ...b }
+        };
+
+        const getNormalizedKey = (k: string): string => {
+          return k.toLowerCase().replace(/[^a-z0-9]/g, '');
+        };
+
+        const mergeRow = (ev: boolean, bk: boolean) => {
+          const merged = { ...baseObj };
+          const existingNormalized = new Set<string>();
+          for (const k of Object.keys(merged)) {
+            existingNormalized.add(getNormalizedKey(k));
+          }
+
+          if (ev && t) {
+            for (const [k, val] of Object.entries(t)) {
+              const normK = getNormalizedKey(k);
+              if (!existingNormalized.has(normK)) {
+                (merged as any)[k] = val;
+                existingNormalized.add(normK);
+              }
+            }
+          }
+
+          if (bk && b) {
+            for (const [k, val] of Object.entries(b)) {
+              const normK = getNormalizedKey(k);
+              if (!existingNormalized.has(normK)) {
+                (merged as any)[k] = val;
+                existingNormalized.add(normK);
+              }
+            }
+          }
+
+          delete (merged as any).everestRaw;
+          delete (merged as any).bookingsRaw;
+          return merged;
+        };
+
+        return {
+          ...baseObj,
+          everestRaw: t,
+          bookingsRaw: b,
+          merged_matched_T_T: mergeRow(true, true),
+          merged_matched_T_F: mergeRow(true, false),
+          merged_matched_F_T: mergeRow(false, true),
+          merged_matched_F_F: mergeRow(false, false),
+          merged_all_T: mergeRow(true, false),
+          merged_all_F: mergeRow(false, false)
+        };
+      });
+
+      set({ processedData: processedFallback, isProcessing: false });
+    }
+  }
+}));
+</file>
+
+<file path="tsconfig.app.json">
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "es2023",
+    "lib": ["ES2023", "DOM"],
+    "module": "esnext",
+    "types": ["vite/client"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"]
+}
+</file>
+
+<file path="tsconfig.json">
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
+</file>
+
+<file path="tsconfig.node.json">
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "es2023",
+    "lib": ["ES2023"],
+    "module": "esnext",
+    "types": ["node"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["vite.config.ts"]
+}
+</file>
+
+<file path="vite.config.ts">
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+})
+</file>
+
+</files>
