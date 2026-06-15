@@ -4,14 +4,14 @@ import './index.css'
 import App from './App.tsx'
 
 // Intercept base64 decoding to log error context
-if (typeof Uint8Array.fromBase64 === 'function') {
-  const originalFromBase64 = Uint8Array.fromBase64;
-  Uint8Array.fromBase64 = function (str: string, options?: any) {
+const uint8ArrayAny = Uint8Array as any;
+if (typeof uint8ArrayAny.fromBase64 === 'function') {
+  const originalFromBase64 = uint8ArrayAny.fromBase64;
+  uint8ArrayAny.fromBase64 = function (str: string, options?: any) {
     try {
       return originalFromBase64.call(Uint8Array, str, options);
     } catch (err: any) {
       console.error("Uint8Array.fromBase64 failed decoding string:", {
-
         strLength: str?.length,
         strStart: str?.substring(0, 100),
         strEnd: str?.substring(str?.length - 100),
