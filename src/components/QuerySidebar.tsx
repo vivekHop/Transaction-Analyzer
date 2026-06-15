@@ -446,7 +446,7 @@ export function QuerySidebar() {
                   return type;
               }
             };
-            return (['matched-ad2', 'matched-ad1-idfc', 'unmatched', 'all', 'everest', 'bookings', 'idfc', 'commercials', 'vendors', 'manual-transactions'] as DatasetType[]).map((type) => (
+            return (['matched-ad2', 'matched-ad1-idfc', 'manual-transactions', 'unmatched', 'all', 'everest', 'bookings', 'idfc', 'commercials', 'vendors'] as DatasetType[]).map((type) => (
               <button
                 key={type}
                 onClick={() => setCurrentDataset(type)}
