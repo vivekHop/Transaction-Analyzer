@@ -31,11 +31,31 @@ export function UploadSection() {
     if (!privateKeyStr || !clientEmail) {
       throw new Error("Google API credentials are not configured in environment variables (.env)");
     }
-    const cleanKey = privateKeyStr
+    
+    // Clean and normalize the environment variable
+    let cleaned = privateKeyStr
       .replace(/^["']|["']$/g, '')
       .replace(/\\+n/g, '\n')
       .replace(/\\+r/g, '\r')
       .trim();
+
+    // Extract the raw base64 body from between PEM headers/footers
+    const header = "-----BEGIN PRIVATE KEY-----";
+    const footer = "-----END PRIVATE KEY-----";
+    
+    let body = cleaned;
+    if (body.includes(header)) {
+      body = body.substring(body.indexOf(header) + header.length);
+    }
+    if (body.includes(footer)) {
+      body = body.substring(0, body.indexOf(footer));
+    }
+    
+    // Strip all non-base64 characters (whitespace, quotes, slashes, backslashes, etc.)
+    const base64Body = body.replace(/[^A-Za-z0-9+/=]/g, '');
+    
+    // Reconstruct clean single-line PEM
+    const cleanKey = `${header}\n${base64Body}\n${footer}`;
     const cleanEmail = clientEmail.replace(/^["']|["']$/g, '').trim();
     
     const privateKey = await importPKCS8(cleanKey, 'RS256');
