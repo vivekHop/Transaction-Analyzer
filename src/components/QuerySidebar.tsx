@@ -153,7 +153,7 @@ export function QuerySidebar() {
     if (!rawData || rawData.length === 0) return;
     
     const dataToExport = rawData.map(row => {
-      const { _rowIdx, ...rest } = row;
+      const { _rowIdx, _rows, _ROWS, ...rest } = row;
       return rest;
     });
     const ws = XLSX.utils.json_to_sheet(dataToExport);

@@ -154,7 +154,7 @@ export function ResultsArea() {
   
   const columns = useMemo(() => {
     if (displayData.length === 0) return [];
-    return Object.keys(displayData[0]).filter(k => k !== 'raw' && k !== 'everestRaw' && k !== 'bookingsRaw' && k !== '_rowIdx');
+    return Object.keys(displayData[0]).filter(k => k !== 'raw' && k !== 'everestRaw' && k !== 'bookingsRaw' && k !== '_rowIdx' && k.toLowerCase() !== '_rows');
   }, [displayData]);
 
   const [activeFilterCol, setActiveFilterCol] = useState<string | null>(null);

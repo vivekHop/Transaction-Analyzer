@@ -43,6 +43,14 @@ For each plan, operations is an array of objects matching:
   "limit": 10
 }
 
+IMPORTANT INSTRUCTIONS FOR GROUPING & SUMMARIES:
+- If a query involves grouping/summarizing data (e.g., "Top X", "X by Y", "Total X for each Y"), you MUST:
+  1. Add a "group_by" operation with "groupByFields".
+  2. Add an "aggregate" operation immediately following it with the aggregations you want (e.g., count, sum) and an "alias".
+  3. If finding "Top" or "Highest" of something, add a "sort" operation after the aggregate step, sorting by your aggregate "alias" in "desc" direction.
+  4. If relevant, add a "limit" operation (e.g. limit: 5 or limit: 10) to only show the top items.
+- A "group_by" operation should NEVER be returned without a subsequent "aggregate" operation.
+
 DO NOT include markdown formatting or backticks in the response. Return raw JSON.
 `;
 
